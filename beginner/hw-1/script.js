@@ -5,38 +5,50 @@
             template: "temlate.js"
         }
     };
+ 
+    let first = second = third = 5;
+    console.log(first, second, third);
 
-    var first = 'firsr-var';
-    var second = 'second-var';
-    var third = 'third-var';
-    console.log(first, second, third);  
+
+    first = 'firsr-var',
+    second = 'second-var',
+    third = 'third-var';
+    console.log(first, second, third); 
 
 
     var anotherOne;
     console.log(anotherOne);
-    var boolean = true;
-    console.log(boolean);
-    var number = 123;
-    console.log(number);
-    var string = 'string';
-    console.log(string);
-    var nullvar = null;
-    console.log(nullvar);
-    console.log(typeof nullvar);
+    anotherOne = true;
+    console.log(anotherOne);
+    anotherOne = 123;
+    console.log(anotherOne);
+    anotherOne = 'string';
+    console.log(anotherOne);
+    anotherOne = null;
+    console.log(anotherOne);
+    console.log(typeof anotherOne);
 
 
     let js = 'JavaScript';
     var courses = 'courses';
-    var result = `${js} ${courses}`;
+    var space = " ";
+    var result = `${js} ${courses}`; 
+    var result1 = js + ' ' + courses;
+    var result2 = js + space + courses;
     console.log(result);
+    console.log(result1);
+    console.log(result2);
 
 
     var num = 0;
-    num += 3; 
-    var z = num, x = num; // var z = x = num;
+    num++;
+    num++;
+    num++;
+    var z = x = num; // var z = x = num;
     console.log(num);
     console.log(z);
     console.log(x);
+
 
     var numberOne = 1;
     console.log(numberOne, typeof numberOne);
