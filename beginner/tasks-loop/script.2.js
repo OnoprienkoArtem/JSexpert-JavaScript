@@ -16,3 +16,12 @@ while (b <= 15) {
     b++;
 }
 
+let c = 1;
+do {
+    if (c % 2 === 0) {
+        console.log(`Число ${c}. Четное`);
+    } else {
+        console.log(`Число ${c}. Нечетное`);
+    }
+    c++;
+} while (c <= 15);
