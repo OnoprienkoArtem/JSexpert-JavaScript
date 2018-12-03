@@ -4,8 +4,7 @@ let result = document.getElementById('result'),
     total = 0,
     totalMessageText;
 
-for (let index = 0; index <= 15; index++) {
-    
+for (let index = 0; index <= 15; index++) {    
     let first = Math.floor((Math.random() * 6) + 1),
         second = Math.floor((Math.random() * 6) + 1),
         double,
@@ -17,11 +16,11 @@ for (let index = 0; index <= 15; index++) {
         continue;
     }
     // проверяем на дубль
-    first === second ? double = `--> Выпал дубль. Число ${first}` : double = '';
+    double = first === second ? `--> Выпал дубль. Число ${first}` : '';
 
     // проверяем на разброс
-    first < 3 && second > 4 ? largeDiffSecondFirst = `${largeDiffText} ${second - first}` : largeDiffSecondFirst = '';
-    second < 3 && first > 4 ? largeDiffFirstSecond = `${largeDiffText} ${first - second}` : largeDiffFirstSecond = '';
+    largeDiffSecondFirst = first < 3 && second > 4 ? `${largeDiffText} ${second - first}` : '';
+    largeDiffFirstSecond = second < 3 && first > 4 ? `${largeDiffText} ${first - second}` : '';
 
     // считаем сумму 
     total += first + second;
@@ -34,7 +33,7 @@ for (let index = 0; index <= 15; index++) {
 }
 
 // проверяем больше ли 100 сумма выпавших костей за все попытки 
-total > 100 ? totalMessageText = `Победа, вы набрали ${total} очков` : totalMessageText = `Вы проиграли, у вас ${total} очков`;
+totalMessageText = total >= 100 ? `Победа, вы набрали ${total} очков` : `Вы проиграли, у вас ${total} очков`;
 
 // выводим сообщение, результат проверки
 totalMessage.innerHTML = `${totalMessageText}`;
