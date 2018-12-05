@@ -18,6 +18,6 @@ function getNumberOfBirds(n) {
 }
 
 
-console.log(getNumberOfBirds(1)); // На ветке сидит 1 вороны
+console.log(getNumberOfBirds(1)); // На ветке сидит 1 ворона
 console.log(getNumberOfBirds(3)); // На ветке сидит 3 вороны
 console.log(getNumberOfBirds(26)); // На ветке сидит 26 ворон
