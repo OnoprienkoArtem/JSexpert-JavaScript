@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
 </head>
 <body>
-    <script async src="script.js"></script>
-    <script>
-        let first = second = third = 5;
-        console.log(first, second, third);
 
+    <script async src="script.js"></script>
+
+    <script>
+        'use strict';
+    // Создайте 3 переменные, сначала присвойте им трем одно и то же значение, выведите каждую переменную в консоль.
+    // Затем установите для каждой переменной разное значение и снова выведите в консоль.
+        var first = second = third = 5;
+        console.log(first, second, third);
 
         first = 'firsr-var',
         second = 'second-var',
@@ -19,19 +24,29 @@
         console.log(first, second, third); 
 
 
+
+    // Объявите переменную, но не присваивайте ей значение.
+    // Выведите ее в консоль чтобы убедиться, что она undefined.
+    // Затем поочередно присваивайте ей разные значения и выводите в консоль.
+    // Булевое значение -> в консоль, число -> в консоль, string -> в консоль, null -> в консоль.
+    // И в конце проверьте переменную с null с помощью оператора typeof.
         var anotherOne;
-        console.log(anotherOne);
+        console.log(anotherOne); // undefined
         anotherOne = true;
-        console.log(anotherOne);
+        console.log(anotherOne); // true
         anotherOne = 123;
-        console.log(anotherOne);
+        console.log(anotherOne); // 123
         anotherOne = 'string';
-        console.log(anotherOne);
+        console.log(anotherOne); // string
         anotherOne = null;
-        console.log(anotherOne);
-        console.log(typeof anotherOne);
+        console.log(anotherOne); // null
+        console.log(typeof anotherOne); // object
 
 
+    // Создайте переменную с помощью let и установите в нее значение «JavaScript».
+    // Создайте обычную переменную с помощью var установите в нее значение «courses».
+    // Склейте две эти строки таким образом чтоб между ними был пробел и результат склеивания запишите в переменную result.
+    // Выведите переменную result в консоль.
         let js = 'JavaScript';
         var courses = 'courses';
         var space = " ";
@@ -43,24 +58,37 @@
         console.log(result2);
 
 
+
+    // Создайте переменную, с помощью инкремента (++) увеличьте ее на 3 и затем присвойте значение вашей переменной
+    // одновременно переменной «z» и «x».
+    // Выражение присваивания должно быть в одну строку.
         var num = 0;
-        num++;
-        num++;
-        num++;
-        var z = x = num; // var z = x = num;
+        console.log(++num); // 1
+        console.log(++num); // 2
+        console.log(++num); // 3
+        console.log(num); // 3
+      
+        var z, x;
+        z = x = num; 
         console.log(num);
         console.log(z);
         console.log(x);
 
 
+    // Необходимо создать переменную типа Number, присвоить ей какое то значение. Затем поочередно преобразовать ее в String,
+    // Boolean и опять в Number.
+    // Обратите внимание что необходимо не переназначить, а именно преобразовать переменную в другой тип.
         var numberOne = 1;
-        console.log(numberOne, typeof numberOne);
+        console.log(numberOne, typeof numberOne);  // 1 "number"
+
         numberOne = String(numberOne);
-        console.log(numberOne, typeof numberOne);
-        numberOne = Boolean(numberOne);
-        console.log(numberOne, typeof numberOne);
-        numberOne = Number(numberOne);
-        console.log(numberOne, typeof numberOne);
+        console.log(numberOne, typeof numberOne); // 1 string
+
+        numberOne = Boolean(numberOne); // or ->  !!numberOne
+        console.log(numberOne, typeof numberOne); // true "boolean"
+
+        numberOne = Number(numberOne);  // or ->   +numberOne
+        console.log(numberOne, typeof numberOne); // 1 "number"
     </script>
 </body>
 </html>
