@@ -38,3 +38,32 @@ totalCount.innerHTML = `всего: ${total}`;
 
 //  выводим сообщение, результат проверки
 totalMessage.innerHTML = total >= 100 ? `Победа, вы набрали ${total} очков` : `Вы проиграли, у вас ${total} очков`;
+
+
+
+// -------------------
+let first,
+    second;
+
+
+function getRndNumber() {
+    return Math.floor((Math.random() * 6) + 1);
+}
+
+console.log(getRndNumber());
+
+(function run() {
+    for (let index = 0; index <= 15; index++) {
+        if (index === 8 || index === 13) {
+            continue;
+        }
+        // console.log(index);
+
+        first = getRndNumber();
+        second = getRndNumber();
+
+        console.log('first', first);
+        console.log('second', second);
+
+    }
+})();
