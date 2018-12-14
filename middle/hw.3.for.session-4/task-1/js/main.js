@@ -45,8 +45,10 @@
 let first,
     second,
     result = document.getElementById('result'),
+    totalCount = document.getElementById('total'),
     message = '',
     double,
+    total,
     largeDiffText = `--> Большой разброс между костями. Разница составляет`,
     largeDiffSecondFirst,
     largeDiffFirstSecond;;
@@ -71,6 +73,12 @@ function isBigDifference() {
     setResult();
 }
 
+function countTotal() {
+    total += first + second;    
+}
+
+
+
 (function run() {
     for (let index = 0; index <= 15; index++) {
         if (index === 8 || index === 13) {
@@ -87,9 +95,13 @@ function isBigDifference() {
         isBigDifference()
         isNumbersEqual();
         
-        message += `Первая кость: ${first}, Вторая кость: ${second} ${double} ${largeDiffFirstSecond} ${largeDiffSecondFirst} <br>`;
 
+        countTotal();
+
+
+        message += `Первая кость: ${first}, Вторая кость: ${second} ${double} ${largeDiffFirstSecond} ${largeDiffSecondFirst} <br>`;
         
+        // totalCount.innerHTML = `всего: ${total}`;
     }
 })();
 
