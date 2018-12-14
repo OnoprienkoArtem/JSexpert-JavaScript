@@ -56,9 +56,7 @@ function getRndNumber() {
     return Math.floor((Math.random() * 6) + 1);
 }
 
-function setResult() {
-
-    
+function setResult() {    
     return result.innerHTML = message;
 }
 
@@ -89,7 +87,7 @@ function isBigDifference() {
         isBigDifference()
         isNumbersEqual();
         
-        message += `Первая кость: ${first}, Вторая кость: ${second} ${double} <br>`;
+        message += `Первая кость: ${first}, Вторая кость: ${second} ${double} ${largeDiffFirstSecond} ${largeDiffSecondFirst} <br>`;
 
         
     }
