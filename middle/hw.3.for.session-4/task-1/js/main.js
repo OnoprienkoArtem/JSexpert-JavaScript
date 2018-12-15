@@ -16,13 +16,14 @@ function getRndNumber() {
     return Math.floor((Math.random() * 6) + 1);
 }
 
-function setResult() {    
-    return result.innerHTML = message;
+function setResult() {   
+    return message += `Первая кость: ${first}, Вторая кость: ${second} ${double} ${largeDiffSecondFirst} ${largeDiffFirstSecond} <br>`;
+    // result.innerHTML = message;
 }
 
 function isNumbersEqual() {
-    double = first === second ? `--> Выпал дубль. Число ${first}` : '';
-    setResult();
+    return double = first === second ? `--> Выпал дубль. Число ${first}` : '';
+    // setResult();
 }
 
 function isBigDifference() {    
@@ -38,16 +39,19 @@ function isBigDifference() {
     // }
     largeDiffSecondFirst = first < 3 && second > 4 ? `${largeDiffText} ${second - first}` : '';
     largeDiffFirstSecond = second < 3 && first > 4 ? `${largeDiffText} ${first - second}` : '';
-    setResult();
+    // setResult();
 }
 
-function countTotal() {    
+function showTotal() {    
     return totalCount.innerHTML = `всего: ${total}`;    
 }
 
-function showTotalMessage() {
-     totalMessage.innerHTML = total >= 100 ? `Победа, вы набрали ${total} очков` : `Вы проиграли, у вас ${total} очков`;
-    return totalMessage;
+function countTotal() {
+    return total += first + second;
+}
+
+function showTotalMessage() {     
+    return totalMessage.innerHTML = total >= 100 ? `Победа, вы набрали ${total} очков` : `Вы проиграли, у вас ${total} очков`;;
 }
 
 (function run() {
@@ -58,15 +62,16 @@ function showTotalMessage() {
 
         first = getRndNumber();
         second = getRndNumber();
-        total += first + second;       
-
+        countTotal();
         isBigDifference()
-        isNumbersEqual();  
-        
-        message += `Первая кость: ${first}, Вторая кость: ${second} ${double} ${largeDiffSecondFirst} ${largeDiffFirstSecond} <br>`;
+        isNumbersEqual(); 
+
+        setResult()
     }
-    countTotal();
+    result.innerHTML = message;
+    showTotal();
     showTotalMessage();
+
 })();
 
 
