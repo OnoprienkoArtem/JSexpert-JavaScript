@@ -17,7 +17,8 @@ function getRndNumber() {
 }
 
 function setResult() {   
-    return message += `Первая кость: ${first}, Вторая кость: ${second} ${double} ${largeDiffSecondFirst} ${largeDiffFirstSecond} <br>`;
+    // return message += `Первая кость: ${first}, Вторая кость: ${second} ${double} ${largeDiffSecondFirst} ${largeDiffFirstSecond} <br>`;
+    return message += `Первая кость: ${first}, Вторая кость: ${second} ${double} ${largeDiffText} <br>`;
     // result.innerHTML = message;
 }
 
@@ -27,18 +28,20 @@ function isNumbersEqual() {
 }
 
 function isBigDifference() {    
-    // if ((first < 3 && second > 4) || (second < 3 && first > 4)) {
-    //     largeDiff = `${first - second}`;
-    //     if (largeDiff < 0) {
-    //         largeDiffText = `--> Большой разброс между костями. Разница составляет ${Math.abs(largeDiff)}`;
-    //     } else {
-    //         largeDiffText = `--> Большой разброс между костями. Разница составляет ${largeDiff}`
-    //     }
-    // } else {
-    //     largeDiff = '';
-    // }
-    largeDiffSecondFirst = first < 3 && second > 4 ? `${largeDiffText} ${second - first}` : '';
-    largeDiffFirstSecond = second < 3 && first > 4 ? `${largeDiffText} ${first - second}` : '';
+    if ((first < 3 && second > 4) || (second < 3 && first > 4)) {
+        largeDiff = `${first - second}`;
+        if (largeDiff < 0) {
+            return largeDiffText = `--> Большой разброс между костями. Разница составляет ${Math.abs(largeDiff)}`;
+        } else {
+            return largeDiffText = `--> Большой разброс между костями. Разница составляет ${largeDiff}`
+        }
+    } else {
+        return largeDiffText = '';
+    }
+
+
+    // largeDiffSecondFirst = first < 3 && second > 4 ? `${largeDiffText} ${second - first}` : '';
+    // largeDiffFirstSecond = second < 3 && first > 4 ? `${largeDiffText} ${first - second}` : '';
     // setResult();
 }
 
