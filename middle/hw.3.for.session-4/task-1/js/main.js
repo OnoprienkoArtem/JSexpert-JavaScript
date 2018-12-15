@@ -44,6 +44,10 @@ function showTotalMessage() {
     return totalMessage.innerHTML = total >= 100 ? `Победа, вы набрали ${total} очков` : `Вы проиграли, у вас ${total} очков`;;
 }
 
+function showResultMessage() {
+    return result.innerHTML = message;
+}
+
 (function run() {
     for (let index = 0; index <= 15; index++) {
         if (index === 8 || index === 13) continue;        
@@ -55,11 +59,7 @@ function showTotalMessage() {
         isNumbersEqual(); 
         setResult()
     }
-    result.innerHTML = message;
+    showResultMessage();
     showTotal();
     showTotalMessage();
 })();
-
-
-
-
