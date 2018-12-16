@@ -1,3 +1,5 @@
+'use strict';
+
 let first,
     second,
     result = document.getElementById('result'),
