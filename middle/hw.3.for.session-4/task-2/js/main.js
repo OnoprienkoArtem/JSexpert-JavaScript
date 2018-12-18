@@ -1,7 +1,7 @@
-const btn = document.getElementById("play"),
-    player1 = document.getElementById("player1"),
-    player2 = document.getElementById("player2"),
-    winnerMessage = document.getElementById("result");
+const btn = document.getElementById("play");
+const player1 = document.getElementById("player1");
+const player2 = document.getElementById("player2");
+const winnerMessage = document.getElementById("result");
 
 function getPlayerResult() {
     return Math.floor((Math.random() * 3) + 1);
