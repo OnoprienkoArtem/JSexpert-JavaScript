@@ -1,9 +1,7 @@
-let btn = document.getElementById("play"),
+const btn = document.getElementById("play"),
     player1 = document.getElementById("player1"),
     player2 = document.getElementById("player2"),
-    winnerMessage = document.getElementById("result"),
-    resultOne, 
-    resultTwo;
+    winnerMessage = document.getElementById("result");
 
 function getPlayerResult() {
     return Math.floor((Math.random() * 3) + 1);
@@ -15,20 +13,20 @@ function getNameById(result) {
     if (result === 3) return 'бумага';
 }
 
-function determineWinner() {
-    resultOne = getPlayerResult();
-    resultTwo = getPlayerResult();
+function determineWinner(resultOne, resultTwo) { 
     if (resultOne === resultTwo) {
-        return winnerMessage.innerHTML = 'ничья';
+        winnerMessage.innerHTML = 'ничья';
     } else if ((resultOne === 1 && resultTwo === 3) || (resultOne === 2 && resultTwo === 1) || (resultOne === 3 && resultTwo === 2)) {
-        return winnerMessage.innerHTML = 'победил игрок № 1';
+        winnerMessage.innerHTML = 'победил игрок № 1';
     } else {
-        return winnerMessage.innerHTML = 'победил игрок № 2';
+        winnerMessage.innerHTML = 'победил игрок № 2';
     }
 }
 
 function runGame() {
-    determineWinner();    
+    let resultOne = getPlayerResult(),
+        resultTwo = getPlayerResult();
+    determineWinner(resultOne, resultTwo);
     player1.innerHTML = getNameById(resultOne);
     player2.innerHTML = getNameById(resultTwo);
 }
