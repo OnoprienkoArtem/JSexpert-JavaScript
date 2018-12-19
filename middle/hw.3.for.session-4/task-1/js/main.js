@@ -10,16 +10,15 @@
         double,
         total = 0,
         difText = '--> Большой разброс между костями. Разница составляет',
-        largeDiffText = '', 
-        largeDiff;
+        largeDiffText = '';
 
 
     function getRndNumber() {
         return Math.floor((Math.random() * 6) + 1);
     }
 
-    function setResult() {       
-        return message += `Первая кость: ${first}, Вторая кость: ${second} ${double} ${largeDiffText} <br>`;  
+    function setResult(str) {       
+        return message += `Первая кость: ${first}, Вторая кость: ${second} ${str} <br>`;  
     }
 
     function isNumbersEqual() {
@@ -27,13 +26,12 @@
     }
 
     function isBigDifference() {    
-        if ((first < 3 && second > 4) || (second < 3 && first > 4)) {
-            largeDiff = `${first - second}`;
-            // setResult()
-            largeDiffText = `${difText} ${Math.abs(largeDiff)}`;     
+        if ((first < 3 && second > 4) || (second < 3 && first > 4)) {            
+            largeDiffText = `${difText} ${Math.abs(first - second)}`;  
         } else {
             largeDiffText = '';
         }
+        setResult(largeDiffText);
     }
 
     function countTotal() {
@@ -58,11 +56,12 @@
         
         first = getRndNumber();
         second = getRndNumber();
-        setResult()
-        isBigDifference()
-
-        countTotal();
+        
         isNumbersEqual(); 
+        isBigDifference()
+        // setResult()
+
+        countTotal();        
     }
     showResultMessage();
     showTotal();
