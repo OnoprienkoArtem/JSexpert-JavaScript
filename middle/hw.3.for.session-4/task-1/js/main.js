@@ -22,7 +22,8 @@
     }
 
     function isNumbersEqual() {
-        return double = first === second ? `--> Выпал дубль. Число ${first}` : '';   
+        double = first === second ? `--> Выпал дубль. Число ${first}` : '';   
+        return setResult(double);
     }
 
     function isBigDifference() {    
@@ -59,7 +60,7 @@
         
         isNumbersEqual(); 
         isBigDifference()
-        // setResult()
+        setResult()
 
         countTotal();        
     }
