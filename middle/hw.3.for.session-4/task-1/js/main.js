@@ -8,8 +8,7 @@
         totalMessage = document.getElementById('totalMessage'),
         message = '',       
         total = 0,
-        difText = '--> Большой разброс между костями. Разница составляет',
-        largeDiffText = '';
+        difText = '--> Большой разброс между костями. Разница составляет';
 
 
     function getRndNumber() {
@@ -21,18 +20,11 @@
     }
 
     function isNumbersEqual() {
-        if (first === second) {
-            return setResult(`--> Выпал дубль. Число ${first}`);
-        }         
+        if (first === second) setResult(`--> Выпал дубль. Число ${first}`);         
     }
 
     function isBigDifference() {    
-        if ((first < 3 && second > 4) || (second < 3 && first > 4)) {            
-            largeDiffText = `${difText} ${Math.abs(first - second)}`;  
-        } else {
-            largeDiffText = '';
-        }
-        setResult(largeDiffText);
+        if ((first < 3 && second > 4) || (second < 3 && first > 4)) setResult(`${difText} ${Math.abs(first - second)}`); 
     }
 
     function countTotal() {
