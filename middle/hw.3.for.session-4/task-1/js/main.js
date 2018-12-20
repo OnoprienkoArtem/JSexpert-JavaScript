@@ -6,8 +6,7 @@
         result = document.getElementById('result'),
         totalCount = document.getElementById('total'),
         totalMessage = document.getElementById('totalMessage'),
-        message = '',
-        double,
+        message = '',       
         total = 0,
         difText = '--> Большой разброс между костями. Разница составляет',
         largeDiffText = '';
@@ -18,12 +17,13 @@
     }
 
     function setResult(str) {       
-        return message += `Первая кость: ${first}, Вторая кость: ${second} ${str} <br>`;  
+        return message += ` ${str} <br>`;
     }
 
     function isNumbersEqual() {
-        double = first === second ? `--> Выпал дубль. Число ${first}` : '';   
-        return setResult(double);
+        if (first === second) {
+            return setResult(`--> Выпал дубль. Число ${first}`);
+        }         
     }
 
     function isBigDifference() {    
@@ -58,10 +58,9 @@
         first = getRndNumber();
         second = getRndNumber();
         
+        setResult(`Первая кость: ${first}, Вторая кость: ${second}`)
         isNumbersEqual(); 
         isBigDifference()
-        setResult()
-
         countTotal();        
     }
     showResultMessage();
