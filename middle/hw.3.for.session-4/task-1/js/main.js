@@ -9,19 +9,22 @@
         message = '',       
         total = 0,
         difText = ' --> Большой разброс между костями. Разница составляет';
+    
+    const isNumbersEqual = () => {
+        if (first === second) {
+            setResult(` --> Выпал дубль. Число ${first}`);    
+        }      
+    }
 
+    const isBigDifference = () => {    
+        if ((first < 3 && second > 4) || (second < 3 && first > 4)) {
+            setResult(`${difText} ${Math.abs(first - second)}`); 
+        } 
+    }
 
     const getRndNumber = () => Math.floor((Math.random() * 6) + 1);    
 
     const setResult = str => message += str;
-    
-    function isNumbersEqual() {
-        if (first === second) setResult(` --> Выпал дубль. Число ${first}`);         
-    }
-
-    function isBigDifference() {    
-        if ((first < 3 && second > 4) || (second < 3 && first > 4)) setResult(`${difText} ${Math.abs(first - second)}`); 
-    }
 
     const countTotal = () => total += first + second;
 
@@ -29,9 +32,7 @@
 
     const showTotal = () => totalCount.innerHTML = `всего: ${total}`;        
 
-    function showTotalMessage() {     
-        return totalMessage.innerHTML = total >= 100 ? `Победа, вы набрали ${total} очков` : `Вы проиграли, у вас ${total} очков`;;
-    }
+    const showTotalMessage = () => totalMessage.innerHTML = total >= 100 ? `Победа, вы набрали ${total} очков` : `Вы проиграли, у вас ${total} очков`;
 
 
     for (let index = 0; index <= 15; index++) {
