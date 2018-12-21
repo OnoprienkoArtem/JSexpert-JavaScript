@@ -32,8 +32,9 @@
 
     const showTotal = () => totalCount.innerHTML = `всего: ${total}`;        
 
-    const showTotalMessage = () => totalMessage.innerHTML = total >= 100 ? `Победа, вы набрали ${total} очков` : `Вы проиграли, у вас ${total} очков`;
-
+    const showTotalMessage = () => {
+        totalMessage.innerHTML = total >= 100 ? `Победа, вы набрали ${total} очков` : `Вы проиграли, у вас ${total} очков`;
+    }
 
     for (let index = 0; index <= 15; index++) {
         if (index === 8 || index === 13) continue;        
