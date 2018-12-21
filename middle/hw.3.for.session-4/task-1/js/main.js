@@ -5,7 +5,7 @@
         second,
         result = document.getElementById('result'),
         totalCount = document.getElementById('total'),
-        totalMessage = document.getElementById('totalMessage'),
+        totalMessage = document.getElementById('totalMessage'),       
         message = '',       
         total = 0,
         difText = ' --> Большой разброс между костями. Разница составляет';
@@ -33,7 +33,13 @@
     const showTotal = () => totalCount.innerHTML = `всего: ${total}`;        
 
     const showTotalMessage = () => {
-        totalMessage.innerHTML = total >= 100 ? `Победа, вы набрали ${total} очков` : `Вы проиграли, у вас ${total} очков`;
+        let textTotalMessages; 
+        if (total >= 100) {
+            textTotalMessages = `Победа, вы набрали ${total} очков`;
+        } else {
+            textTotalMessages = `Вы проиграли, у вас ${total} очков`;
+        }
+        totalMessage.innerHTML = textTotalMessages;
     }
 
     for (let index = 0; index <= 15; index++) {
