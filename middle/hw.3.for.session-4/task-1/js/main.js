@@ -8,36 +8,26 @@
         totalMessage = document.getElementById('totalMessage'),
         message = '',       
         total = 0,
-        difText = '--> Большой разброс между костями. Разница составляет';
+        difText = ' --> Большой разброс между костями. Разница составляет';
 
 
-    function getRndNumber() {
-        return Math.floor((Math.random() * 6) + 1);
-    }
+    const getRndNumber = () => Math.floor((Math.random() * 6) + 1);    
 
-    function setResult(str) {       
-        return message += ` ${str} <br>`;
-    }
-
+    const setResult = str => message += str;
+    
     function isNumbersEqual() {
-        if (first === second) setResult(`--> Выпал дубль. Число ${first}`);         
+        if (first === second) setResult(` --> Выпал дубль. Число ${first}`);         
     }
 
     function isBigDifference() {    
         if ((first < 3 && second > 4) || (second < 3 && first > 4)) setResult(`${difText} ${Math.abs(first - second)}`); 
     }
 
-    function countTotal() {
-        return total += first + second;
-    }
+    const countTotal = () => total += first + second;
 
-    function showResultMessage() {
-        return result.innerHTML = message;
-    }
+    const showResultMessage = () => result.innerHTML = message;    
 
-    function showTotal() {    
-        return totalCount.innerHTML = `всего: ${total}`;    
-    }
+    const showTotal = () => totalCount.innerHTML = `всего: ${total}`;        
 
     function showTotalMessage() {     
         return totalMessage.innerHTML = total >= 100 ? `Победа, вы набрали ${total} очков` : `Вы проиграли, у вас ${total} очков`;;
@@ -50,7 +40,7 @@
         first = getRndNumber();
         second = getRndNumber();
         
-        setResult(`Первая кость: ${first}, Вторая кость: ${second}`)
+        setResult(`<br> Первая кость: ${first}, Вторая кость: ${second}`)
         isNumbersEqual(); 
         isBigDifference()
         countTotal();        
