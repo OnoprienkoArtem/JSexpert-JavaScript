@@ -19,12 +19,44 @@ function init() {
 
     let wayScheme = document.getElementById('type-selector').value;
 
+    switch (Number(wayScheme)) {
+        case 1: usingFIrstWay();
+            break;        
+        case 2: usingSecondWay();
+            break;
+        case 3: usingThirddWay();
+            break;
+        default: console.log('вы ничего не выбрали');
+            break;
+    }
+
+
+    function usingFIrstWay() {
+        console.log('первый!');
+    }
+
+    function usingSecondWay() {
+        console.log('второй!!');
+    }
+
+    function usingThirddWay() {
+        console.log('третий!!!');
+    }
+
+    
+
     console.log(wayScheme);
 
     // сначала снимаете значение с селектбокса, 
     // document.getElementById("").value
     // определяете какой способ построения галлереи надо использовать
     // запускаете необходимую логику
+
+
+ 
+
+
+          
 
     
     // код ниже дан для справки, вам нужно будет использовать тот вариан который вы выбрали в селектбоксе
