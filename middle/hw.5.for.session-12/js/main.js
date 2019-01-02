@@ -14,10 +14,18 @@ let item = {
 };
 
 function init() {
+
+    console.log(data);
+
+    let wayScheme = document.getElementById('type-selector').value;
+
+    console.log(wayScheme);
+
     // сначала снимаете значение с селектбокса, 
     // document.getElementById("").value
     // определяете какой способ построения галлереи надо использовать
     // запускаете необходимую логику
+
     
     // код ниже дан для справки, вам нужно будет использовать тот вариан который вы выбрали в селектбоксе
     // пример построения галлереи с помощю replace
@@ -37,11 +45,14 @@ function init() {
     .replace("$date", item.date);
     
     firstBlock.innerHTML = resultHTML;	
+
     
     // один из примеров как прятать блоки
     document.querySelector('.first-group').classList.add("show");
     document.querySelector('.second-group').classList.add("hide");
     document.querySelector('.third-group').classList.add("hide");
+
+
     
     // пример построения галлереи с помощю шаблонных строк
     let secondItemTemplate = `<div class="col-sm-3 col-xs-6">\
