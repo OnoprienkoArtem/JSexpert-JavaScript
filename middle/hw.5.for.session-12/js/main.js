@@ -13,6 +13,27 @@ let item = {
 	date : "2015/01/25 14:15"
 };
 
+
+const newData = [];
+
+const createCopy = (array, newArray) => {
+    array.forEach(item => {
+        newArray.push({
+            url: item.url,              
+            name: item.name,
+            description: item.description,
+            date: item.date
+        })
+    })
+};
+
+createCopy(data, newData);
+
+console.log(newData);
+
+
+
+
 function init() {
 
     console.log(data);
@@ -45,12 +66,10 @@ function init() {
 
     
 
-    console.log(wayScheme);
+ 
 
-    // сначала снимаете значение с селектбокса, 
-    // document.getElementById("").value
-    // определяете какой способ построения галлереи надо использовать
-    // запускаете необходимую логику
+    // сначала снимаете значение с селектбокса, document.getElementById("").value
+    // определяете какой способ построения галлереи надо использовать, запускаете необходимую логику
 
 
  
