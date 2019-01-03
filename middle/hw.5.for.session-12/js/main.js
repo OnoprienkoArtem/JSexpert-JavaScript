@@ -32,9 +32,39 @@ createCopy(data, newData);
 console.log(newData);
 
 
+const newCorrectData = newData.map(item => {
+    let itemName = item.name.toLowerCase();
+    itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
+   
+    let itemUrl = `http://${item.url}`;
+    
+    let itemDescription = `${item.description.substr(0, 15)}...`;
+    
+    const getDateObject = date => {
+        let tmp = new Date(date);
+        return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
+    }; 
+    
+    return {
+        url: itemUrl,
+        name: itemName,
+        description: itemDescription,
+        date: getDateObject(item.date)
+    };
+});
+
+console.log(newCorrectData);
+
+
+
+
 
 
 function init() {
+
+    newCorrectData.forEach(item => {
+
+    });
 
     console.log(data);
 
