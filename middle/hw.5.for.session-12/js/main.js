@@ -60,13 +60,11 @@ console.log(newCorrectData);
 
 
 
-function init() {
+function init() {   
+    
 
-    newCorrectData.forEach(item => {
 
-    });
-
-    console.log(data);
+    // console.log(data);
 
     let wayScheme = document.getElementById('type-selector').value;
 
@@ -87,7 +85,20 @@ function init() {
     }
 
     function usingSecondWay() {
-        console.log('второй!!');
+        let currnetRes = String();
+        newCorrectData.forEach(item => {
+            let secondItemTemplate = `
+                <div class="col-sm-3 col-xs-6">
+                    <img src="${item.url}" alt="${item.name}" class="img-thumbnail">
+                    <div class="info-wrapper">
+                        <div class="text-muted">${item.name}</div>
+                        <div class="text-muted top-padding">${item.description}</div>
+                        <div class="text-muted">${item.date}</div>
+                    </div>
+                </div>`;
+            currnetRes += secondItemTemplate;
+        });
+        secondBlock.innerHTML = currnetRes;
     }
 
     function usingThirddWay() {
@@ -125,25 +136,25 @@ function init() {
     .replace("$description", item.description)
     .replace("$date", item.date);
     
-    firstBlock.innerHTML = resultHTML;	
+    // firstBlock.innerHTML = resultHTML;	
 
     
     // один из примеров как прятать блоки
-    document.querySelector('.first-group').classList.add("show");
-    document.querySelector('.second-group').classList.add("hide");
+    document.querySelector('.first-group').classList.add("hide");
+    document.querySelector('.second-group').classList.add("show");
     document.querySelector('.third-group').classList.add("hide");
 
 
     
     // пример построения галлереи с помощю шаблонных строк
-    let secondItemTemplate = `<div class="col-sm-3 col-xs-6">\
-    <img src="${item.url}" alt="${item.name}" class="img-thumbnail">\
-    <div class="info-wrapper">\
-        <div class="text-muted">${item.name}</div>\
-        <div class="text-muted top-padding">${item.description}</div>\
-        <div class="text-muted">${item.date}</div>\
-    </div>\
-    </div>`;
+    // let secondItemTemplate = `<div class="col-sm-3 col-xs-6">\
+    // <img src="${item.url}" alt="${item.name}" class="img-thumbnail">\
+    // <div class="info-wrapper">\
+    //     <div class="text-muted">${item.name}</div>\
+    //     <div class="text-muted top-padding">${item.description}</div>\
+    //     <div class="text-muted">${item.date}</div>\
+    // </div>\
+    // </div>`;
     //secondBlock.innerHTML = secondItemTemplate;	
     
 }
