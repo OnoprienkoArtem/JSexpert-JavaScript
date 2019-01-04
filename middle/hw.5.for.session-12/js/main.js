@@ -95,7 +95,7 @@ function init() {
         
         galleryArray.forEach(item => {
             let secondItemTemplate = `
-                <div class="col-sm-3 col-xs-6">
+                <div class="col-sm-3 col-xs-6 card">
                     <img src="${item.url}" alt="${item.name}" class="img-thumbnail">
                     <div class="info-wrapper">
                         <div class="text-muted">${item.name}</div>

@@ -1,9 +1,13 @@
+body {
+    overflow: overlay;
+}
+
 .site-wrapper {
-    margin-top: 110px;
+    margin-top: 60px;
 }
 
 .text-center {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .navbar {
@@ -19,9 +23,13 @@
 }
 
 .count-selector {
-    width:130px;
+    width:50%;
 }
 
 .top-padding {
     padding-top: 10px;
+}
+
+.card {
+    margin-bottom: 15px;
 }
