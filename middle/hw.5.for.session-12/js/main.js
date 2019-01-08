@@ -84,7 +84,32 @@
         };
         
 
+        // методом replace
+        function usingFIrstWay() {
+            document.querySelector('.first-group').classList.add("show");
+            
+            let replaceItemTemplate = '<div class="col-sm-3 col-xs-6 card">\
+                    <img src="$url" alt="$name" class="img-thumbnail">\
+                    <div class="info-wrapper">\
+                        <div class="text-muted">$name</div>\
+                        <div class="text-muted top-padding">$description</div>\
+                        <div class="text-muted">$date</div>\
+                    </div>\
+                </div>';
 
+            let currnetRes = '';
+
+            galleryArray.forEach(item => {
+                let resultHTML = replaceItemTemplate
+                    .replace(/\$name/gi, item.name)
+                    .replace("$url", item.url)
+                    .replace("$description", item.description)
+                    .replace("$date", item.date);
+
+                currnetRes += resultHTML;
+            });
+            firstBlock.innerHTML = currnetRes;       
+        }
 
         // методом шаблонных строк
         function usingSecondWay() {
