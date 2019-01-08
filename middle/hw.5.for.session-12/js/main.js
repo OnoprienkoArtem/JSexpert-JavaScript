@@ -144,7 +144,33 @@
                 card.setAttribute('class', 'col-sm-3 col-xs-6 card');            
                 wrapper.appendChild(card);
 
+                let img = document.createElement('img');
+                img.setAttribute('class', 'img-thumbnail');
+                img.setAttribute('src', `${item.url}`);
+                img.setAttribute('alt', `${item.name}`);        
+                card.appendChild(img);
 
+                let infoWrapper = document.createElement('div');
+                infoWrapper.setAttribute('class', 'info-wrapper');
+                card.appendChild(infoWrapper);
+                
+                let nameText = document.createElement('div');
+                nameText.setAttribute('class', 'text-muted');
+                let textNodeName = document.createTextNode(`${item.name}`);
+                nameText.appendChild(textNodeName);
+                infoWrapper.appendChild(nameText);
+
+                let descriptionText = document.createElement('div');
+                descriptionText.setAttribute('class', 'text-muted top-padding');
+                let textNodeDescription = document.createTextNode(`${item.description}`);
+                descriptionText.appendChild(textNodeDescription);
+                infoWrapper.appendChild(descriptionText);
+
+                let dateText = document.createElement('div');
+                dateText.setAttribute('class', 'text-muted');
+                let textNodeDate = document.createTextNode(`${item.date}`);
+                dateText.appendChild(textNodeDate);
+                infoWrapper.appendChild(dateText);
 
                 currnetRes += wrapper.innerHTML;           
             });       
