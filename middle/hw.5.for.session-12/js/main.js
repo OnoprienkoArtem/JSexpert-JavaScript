@@ -131,7 +131,25 @@
             });  
             secondBlock.innerHTML = currnetRes;
         };
-   
+
+        // методом createElement
+        function usingThirddWay() {
+            document.querySelector('.third-group').classList.add("show");
+
+            let currnetRes = '';
+
+            galleryArray.forEach(item => {
+                let wrapper = document.createElement('div');
+                let card = document.createElement('div');
+                card.setAttribute('class', 'col-sm-3 col-xs-6 card');            
+                wrapper.appendChild(card);
+
+
+
+                currnetRes += wrapper.innerHTML;           
+            });       
+            thirdBlock.innerHTML = currnetRes; 
+        };     
     }
 
     btn.addEventListener("click", init);
