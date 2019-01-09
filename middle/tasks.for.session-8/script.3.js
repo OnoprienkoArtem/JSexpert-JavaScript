@@ -6,6 +6,6 @@ function getExt(string) {
     return res[res.length - 1];
 }
 
-console.log(getExt('/home/user/project/script.js'));
-console.log(getExt('/home/user/project/script.html'));
-console.log(getExt('/home/user/project/script.json'));
+console.log(getExt('/home/user/project/script.js')); // js
+console.log(getExt('/home/user/project/script.html')); // html
+console.log(getExt('/home/user/project/script.json')); // json
