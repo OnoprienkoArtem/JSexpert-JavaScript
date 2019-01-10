@@ -7,3 +7,6 @@ let desiredElem = goods.indexOf('technics');
 
 console.log(desiredElem); // 2
 
+goods.splice(desiredElem, 1);
+
+console.log(goods); // ["foods", "fruits", "phones", "computers"]
