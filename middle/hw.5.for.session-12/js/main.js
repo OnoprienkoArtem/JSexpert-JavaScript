@@ -179,5 +179,4 @@
     }
 
     btn.addEventListener("click", init);
-
-})()
+})();
