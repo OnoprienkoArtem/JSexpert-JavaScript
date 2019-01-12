@@ -6,9 +6,7 @@ console.log(currentDate);
 
 
 
-function formattingDay(date) {
-    return (date < 10) ? '0' + date : date;
-}
+const formattingDay = date => date < 10 ? '0' + date : date;
 
 let specificFormatOfTime = `${currentDate.getHours()}:${currentDate.getMinutes()} ${currentDate.getDate()}/${formattingDay(currentDate.getMonth() + 1)}/${currentDate.getFullYear()}`;
 
