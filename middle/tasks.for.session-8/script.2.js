@@ -4,3 +4,8 @@
 let currentDate = new Date();
 console.log(currentDate);
 
+
+
+let specificFormatOfTime = `${currentDate.getHours()}:${currentDate.getMinutes()} ${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+
+console.log(specificFormatOfTime);
