@@ -6,6 +6,10 @@ console.log(currentDate);
 
 
 
-let specificFormatOfTime = `${currentDate.getHours()}:${currentDate.getMinutes()} ${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+function formattingDay(date) {
+    return (date < 10) ? '0' + date : date;
+}
+
+let specificFormatOfTime = `${currentDate.getHours()}:${currentDate.getMinutes()} ${currentDate.getDate()}/${formattingDay(currentDate.getMonth() + 1)}/${currentDate.getFullYear()}`;
 
 console.log(specificFormatOfTime);
