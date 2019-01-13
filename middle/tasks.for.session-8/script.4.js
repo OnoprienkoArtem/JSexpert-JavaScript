@@ -4,13 +4,12 @@
 
 const arr = [1, 2, 2, 4, 5, 4, 7, 8, 7, 3, 6];
 
-function removeDuplicates(arr) {
+function removeDuplicates(array) {
     var i = 0,
-        current,
-        length = arr.length,
+        current,        
         unique = [];
-    for (; i < length; i++) {
-        current = arr[i];
+    for (; i < array.length; i++) {
+        current = array[i];
         if (!~unique.indexOf(current)) {
             unique.push(current);
         }
@@ -19,4 +18,11 @@ function removeDuplicates(arr) {
 };
 
 console.log(removeDuplicates(arr));
+
+
+
+let uniq = a => [...new Set(a)];
+
+console.log(uniq(arr));
+
 
