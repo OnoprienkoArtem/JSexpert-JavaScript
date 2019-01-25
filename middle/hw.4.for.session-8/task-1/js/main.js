@@ -28,8 +28,8 @@ function transform() {
 
    const newArr = [];
 
-   const createCopy = (array, newArray) => {
-      array.forEach(item => {
+   function createCopy(array, newArray) {
+      return array.forEach(item => {
          newArray.push({
             name: item.name,
             description: item.description,
@@ -38,7 +38,7 @@ function transform() {
             date: item.date
          })
       })
-   };
+   }  
 
    createCopy(data, newArr);
 
