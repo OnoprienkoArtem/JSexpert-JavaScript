@@ -48,45 +48,50 @@ function transform() {
 // 4. На каждой итерации цикла мы получаем один объект из массива объектов.
 // Берем этот объект и преобразоваем его поля по следующим правилам.   
 
-   const newArrayForMap = newArr.map(item => {
-// 5. Для поля Name: с помощью функций работы со стрингами делаете первую букву большой, остальные маленькие(ДЖИП - > Джип)
-      let itemName = item.name.toLowerCase();
-      itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);   
 
-// 6. Для поля url: добавить перед ним« http: //»
-      let itemUrl = `http://${item.url}`;
+   function newArrayForMap() {
 
-// 7. Для поля Description: с помощью функций работы со стрингами делаете обрезание до 15 символов.
-// После добавляем многоточие(…) Остальное отбрасываете.
-      let itemDescription = `${item.description.substr(0, 15)}...`;
+      const newCurrentArr = newArr.map(item => {
+      // 5. Для поля Name: с помощью функций работы со стрингами делаете первую букву большой, остальные маленькие(ДЖИП - > Джип)
+         let itemName = item.name.toLowerCase();
+         itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);   
 
-// 8. Для поля date: создать объект даты из заданных миллисекунд и потом отобразить в виде« 2015 / 07 / 02 14: 15»
-      const getDateObject = date => {
-         let tmp = new Date(date);
-         return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
-      };
+         // 6. Для поля url: добавить перед ним« http: //»
+         let itemUrl = `http://${item.url}`;
 
-// 9*. Более предпочтительно работать с датой с помощью библиотеки moment.js
-      const getDateMoment = date => {
-         let tmp = moment(date);       
-         return `${tmp.year()}/${tmp.month()}/${tmp.date()} ${tmp.hour()}:${tmp.minute()}`;
-      };
+         // 7. Для поля Description: с помощью функций работы со стрингами делаете обрезание до 15 символов.
+         // После добавляем многоточие(…) Остальное отбрасываете.
+         let itemDescription = `${item.description.substr(0, 15)}...`;
 
-// 10. Для поля params: из значений ключей сформировать строку типа «true => 80».
-      const concatTwoValue = (valueonw, valueTwo) => `${valueonw} => ${valueTwo}`;   
+         // 8. Для поля date: создать объект даты из заданных миллисекунд и потом отобразить в виде« 2015 / 07 / 02 14: 15»
+         const getDateObject = date => {
+            let tmp = new Date(date);
+            return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
+         };
 
-// 11. Создать новое поле isVisible. Переложить в это поле значение поля params.status.
+         // 9*. Более предпочтительно работать с датой с помощью библиотеки moment.js
+         const getDateMoment = date => {
+            let tmp = moment(date);       
+            return `${tmp.year()}/${tmp.month()}/${tmp.date()} ${tmp.hour()}:${tmp.minute()}`;
+         };
 
-      return {
-         name: itemName,
-         url: itemUrl,
-         description: itemDescription,
-         dateObject: getDateObject(item.date),
-         dateMonent: getDateMoment(item.date),
-         params: concatTwoValue(item.params.status, item.params.progress),
-         isVisible: item.params.status
-      }      
-   });  
+         // 10. Для поля params: из значений ключей сформировать строку типа «true => 80».
+         const concatTwoValue = (valueonw, valueTwo) => `${valueonw} => ${valueTwo}`;   
+
+         // 11. Создать новое поле isVisible. Переложить в это поле значение поля params.status.
+
+         return {
+            name: itemName,
+            url: itemUrl,
+            description: itemDescription,
+            dateObject: getDateObject(item.date),
+            dateMonent: getDateMoment(item.date),
+            params: concatTwoValue(item.params.status, item.params.progress),
+            isVisible: item.params.status
+         }      
+      }); 
+
+   }
   
    printResultToConsole('map => ', newArrayForMap);
 
