@@ -48,57 +48,57 @@ function transform() {
 // 4. На каждой итерации цикла мы получаем один объект из массива объектов.
 // Берем этот объект и преобразоваем его поля по следующим правилам.   
 
+function getNewFormatArray() {
+   const newArrayForMap = newArr.map(item => {
+// 5. Для поля Name: с помощью функций работы со стрингами делаете первую букву большой, остальные маленькие(ДЖИП - > Джип)
+      let itemName = item.name.toLowerCase();
+      itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);   
 
-   function newArrayForMap() {
+// 6. Для поля url: добавить перед ним« http: //»
+      let itemUrl = `http://${item.url}`;
 
-      const newCurrentArr = newArr.map(item => {
-      // 5. Для поля Name: с помощью функций работы со стрингами делаете первую букву большой, остальные маленькие(ДЖИП - > Джип)
-         let itemName = item.name.toLowerCase();
-         itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);   
+// 7. Для поля Description: с помощью функций работы со стрингами делаете обрезание до 15 символов.
+// После добавляем многоточие(…) Остальное отбрасываете.
+      let itemDescription = `${item.description.substr(0, 15)}...`;
 
-         // 6. Для поля url: добавить перед ним« http: //»
-         let itemUrl = `http://${item.url}`;
+// 8. Для поля date: создать объект даты из заданных миллисекунд и потом отобразить в виде« 2015 / 07 / 02 14: 15»
+      const getDateObject = date => {
+         let tmp = new Date(date);
+         return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
+      };
 
-         // 7. Для поля Description: с помощью функций работы со стрингами делаете обрезание до 15 символов.
-         // После добавляем многоточие(…) Остальное отбрасываете.
-         let itemDescription = `${item.description.substr(0, 15)}...`;
+// 9*. Более предпочтительно работать с датой с помощью библиотеки moment.js
+      const getDateMoment = date => {
+         let tmp = moment(date);       
+         return `${tmp.year()}/${tmp.month()}/${tmp.date()} ${tmp.hour()}:${tmp.minute()}`;
+      };
 
-         // 8. Для поля date: создать объект даты из заданных миллисекунд и потом отобразить в виде« 2015 / 07 / 02 14: 15»
-         const getDateObject = date => {
-            let tmp = new Date(date);
-            return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
-         };
+// 10. Для поля params: из значений ключей сформировать строку типа «true => 80».
+      const concatTwoValue = (valueonw, valueTwo) => `${valueonw} => ${valueTwo}`;   
 
-         // 9*. Более предпочтительно работать с датой с помощью библиотеки moment.js
-         const getDateMoment = date => {
-            let tmp = moment(date);       
-            return `${tmp.year()}/${tmp.month()}/${tmp.date()} ${tmp.hour()}:${tmp.minute()}`;
-         };
+// 11. Создать новое поле isVisible. Переложить в это поле значение поля params.status.
 
-         // 10. Для поля params: из значений ключей сформировать строку типа «true => 80».
-         const concatTwoValue = (valueonw, valueTwo) => `${valueonw} => ${valueTwo}`;   
+      return {
+         name: itemName,
+         url: itemUrl,
+         description: itemDescription,
+         dateObject: getDateObject(item.date),
+         dateMonent: getDateMoment(item.date),
+         params: concatTwoValue(item.params.status, item.params.progress),
+         isVisible: item.params.status
+      }      
+   }); 
+   return newArrayForMap;
 
-         // 11. Создать новое поле isVisible. Переложить в это поле значение поля params.status.
+   } 
 
-         return {
-            name: itemName,
-            url: itemUrl,
-            description: itemDescription,
-            dateObject: getDateObject(item.date),
-            dateMonent: getDateMoment(item.date),
-            params: concatTwoValue(item.params.status, item.params.progress),
-            isVisible: item.params.status
-         }      
-      }); 
-
-   }
   
-   printResultToConsole('map => ', newArrayForMap);
+   printResultToConsole('map => ', getNewFormatArray());
 
 
-   const newArrayFromFilter = newArrayForMap.filter((item) => item.isVisible === true);
+   // const newArrayFromFilter = newArrayForMap.filter((item) => item.isVisible === true);
 
-   printResultToConsole('filter => ', newArrayFromFilter); 
+   // printResultToConsole('filter => ', newArrayFromFilter); 
 }
 
 
