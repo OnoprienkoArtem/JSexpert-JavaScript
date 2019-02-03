@@ -1,12 +1,20 @@
 (function () {
 
-    let btn = document.getElementById("play"),      
-        secondBlock = document.querySelector('#second-line'),     
-        firstGroup = document.querySelector('.first-group'),
-        secondGroup = document.querySelector('.second-group'),
-        thirdGroup = document.querySelector('.third-group'),
-        forthGroup = document.querySelector('.forth-group');
 
+    const arrA = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const arrB = [];    
+
+    function bringItemToB() {
+        let item = arrA.shift();
+        arrB.push(item);
+        console.log(item, arrA, arrB);
+    }
+
+
+
+
+    let btn = document.getElementById("play"),      
+       
 
     const newData = createCopy(data);
 
@@ -50,39 +58,10 @@
     }
 
 
-
-
-
-    function init() {
-        firstGroup.classList.remove("show");
-        secondGroup.classList.remove("show");
-        thirdGroup.classList.remove("show");
-        forthGroup.classList.remove("show");
-
-        let amountImg = document.getElementById('line-selector').value;
-
-        let galleryArray = [];
-
-        switch (Number(amountImg)) {
-            case 1:
-                galleryArray = correctData.slice(0, 3);
-                break;
-            case 2:
-                galleryArray = correctData.slice(0, 6);
-                break;
-            default:
-                galleryArray = correctData;
-        };
-
-
-
-
-       
+    function init() {  
 
         // методом шаблонных строк
-        function usingSecondWay() {
-            document.querySelector('.second-group').classList.add("show");
-
+        function usingSecondWay() { 
             let currnetRes = '';
 
             galleryArray.forEach(item => {
@@ -103,5 +82,5 @@
         usingSecondWay();
     }
 
-    btn.addEventListener("click", init);
+    btn.addEventListener("click", bringItemToB);
 })();
