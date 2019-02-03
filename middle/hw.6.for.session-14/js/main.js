@@ -1,20 +1,9 @@
-(function () {
+(function () {   
 
 
-    const arrA = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const arrB = [];    
+    let btn = document.getElementById("play");
+    let secondBlock = document.querySelector('#second-line');
 
-    function bringItemToB() {
-        let item = arrA.shift();
-        arrB.push(item);
-        console.log(item, arrA, arrB);
-    }
-
-
-
-
-    let btn = document.getElementById("play"),      
-       
 
     const newData = createCopy(data);
 
@@ -58,13 +47,44 @@
     }
 
 
-    function init() {  
+
+    
+    const arrB = [];
+
+
+
+
+   
+    
+
+
+    function init() { 
+
+        
+
+        (function bringItemToB() {
+            let item = correctData.shift();
+            arrB.push(item);            
+        })();
+
+        let restItems = correctData.length;
+
+        console.log(restItems);
+
+     
+
+        if (restItems === 0) {
+            btn.disabled = true;            
+            btn.removeEventListener("click", init);
+        }
+
+        // bringItemToB();
 
         // методом шаблонных строк
         function usingSecondWay() { 
             let currnetRes = '';
 
-            galleryArray.forEach(item => {
+            arrB.forEach(item => {
                 let secondItemTemplate = `
                     <div class="col-sm-3 col-xs-6 card">
                         <img src="${item.url}" alt="${item.name}" class="img-thumbnail">
@@ -82,5 +102,5 @@
         usingSecondWay();
     }
 
-    btn.addEventListener("click", bringItemToB);
+    btn.addEventListener("click", init);
 })();
