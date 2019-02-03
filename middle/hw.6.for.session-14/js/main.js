@@ -100,7 +100,7 @@
             secondBlock.innerHTML = currnetRes;
         };
 
-     
+        usingSecondWay();
     }
 
     btn.addEventListener("click", init);
