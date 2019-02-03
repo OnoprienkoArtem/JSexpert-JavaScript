@@ -3,67 +3,77 @@
     let btn = document.getElementById("play"),
         firstBlock = document.querySelector('#first-line'),
         secondBlock = document.querySelector('#second-line'),
-        thirdBlock = document.querySelector('#third-line');
+        thirdBlock = document.querySelector('#third-line'),
+        firstGroup = document.querySelector('.first-group'),
+        secondGroup = document.querySelector('.second-group'),
+        thirdGroup = document.querySelector('.third-group'),
+        forthGroup = document.querySelector('.forth-group');
 
 
-    const newData = [];
+    const newData = createCopy(data);
 
-    const createCopy = (array, newArray) => {
+    function createCopy(array) {
+        const newData = [];
         array.forEach(item => {
-            newArray.push({
+            newData.push({
                 url: item.url,              
                 name: item.name,
                 description: item.description,
                 date: item.date
             })
-        })
+        });
+        return newData;
     };
 
-    createCopy(data, newData);
+
+    const correctData = newCorrectData(newData);
+   
+    function newCorrectData(arr) {
+        return arr.map(item => {
+            let itemName = item.name.toLowerCase();
+            itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
+        
+            let itemUrl = `http://${item.url}`;
+            
+            let itemDescription = `${item.description.substr(0, 15)}...`;
+            
+            const getDateObject = date => {
+                let tmp = new Date(date);
+                return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
+            }; 
+            
+            return {
+                url: itemUrl,
+                name: itemName,
+                description: itemDescription,
+                date: getDateObject(item.date)
+            };
+        });
+    }
 
 
-    const newCorrectData = newData.map(item => {
-        let itemName = item.name.toLowerCase();
-        itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
-    
-        let itemUrl = `http://${item.url}`;
-        
-        let itemDescription = `${item.description.substr(0, 15)}...`;
-        
-        const getDateObject = date => {
-            let tmp = new Date(date);
-            return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
-        }; 
-        
-        return {
-            url: itemUrl,
-            name: itemName,
-            description: itemDescription,
-            date: getDateObject(item.date)
-        };
-    });
+
 
 
     function init() { 
-
-        document.querySelector('.first-group').classList.remove("show");
-        document.querySelector('.second-group').classList.remove("show");
-        document.querySelector('.third-group').classList.remove("show");
-        document.querySelector('.forth-group').classList.remove("show");
-
+        firstGroup.classList.remove("show");
+        secondGroup.classList.remove("show");
+        thirdGroup.classList.remove("show");
+        forthGroup.classList.remove("show");
+        
         let amountImg = document.getElementById('line-selector').value;
 
         let galleryArray = [];
 
         switch (Number(amountImg)) {
             case 1: 
-                galleryArray = newCorrectData.slice(0, 3);
+                galleryArray = correctData.slice(0, 3);
                 break;
             case 2: 
-                galleryArray = newCorrectData.slice(0, 6);
+                galleryArray = correctData.slice(0, 6);
                 break;
             default: 
-                galleryArray = newCorrectData;
+                galleryArray = correctData;
         };
 
 
