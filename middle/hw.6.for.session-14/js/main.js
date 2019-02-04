@@ -81,7 +81,7 @@
             btn.addEventListener("click", message);
         }
 
-        // bringItemToB();
+       
 
         // методом шаблонных строк
         function usingSecondWay() { 
