@@ -4,6 +4,8 @@
     let btn = document.getElementById("play");
     let secondBlock = document.querySelector('#second-line');
 
+    let availableQuantity = document.querySelector('#availableQuantity');
+
 
     const newData = createCopy(data);
 
@@ -49,14 +51,11 @@
 
 
     
-    const arrB = [];
-
-
-
-
-   
+    const arrB = [];  
     
 
+    let restItems = correctData.length;
+    availableQuantity.innerHTML = restItems;
 
     function init() { 
 
@@ -69,8 +68,9 @@
             arrB.push(item);            
         })();
 
-        let restItems = correctData.length;
+        restItems = correctData.length;
 
+        availableQuantity.innerHTML = restItems;
         console.log(restItems);
 
      
