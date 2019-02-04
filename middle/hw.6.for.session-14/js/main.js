@@ -60,7 +60,9 @@
 
     function init() { 
 
-        
+        function message() {
+            console.log("дальнейшее добавление невозможно");
+        }
 
         (function bringItemToB() {
             let item = correctData.shift();
@@ -74,8 +76,9 @@
      
 
         if (restItems === 0) {
-            btn.disabled = true;            
+            btn.style['background-color'] = 'gray';
             btn.removeEventListener("click", init);
+            btn.addEventListener("click", message);
         }
 
         // bringItemToB();
