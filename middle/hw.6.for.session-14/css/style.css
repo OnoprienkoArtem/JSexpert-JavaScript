@@ -34,6 +34,12 @@ body {
     margin-bottom: 15px;
 }
 
+
+.info-block {
+    display: flex;
+    align-items: center;
+}
+
 .modal-dialog {
-    max-width: 200px;
+    max-width: 250px;
 }
