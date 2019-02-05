@@ -51,40 +51,31 @@
 
 
     
-    const arrB = [];  
-    
-
-    let restItems = correctData.length;
-    availableQuantity.innerHTML = restItems;
+    const arrB = [];    
+  
+    availableQuantity.innerHTML = correctData.length;
 
     function init() { 
 
-        function message() {
-            console.log("дальнейшее добавление невозможно");
-        }
+    
 
         (function bringItemToB() {
             let item = correctData.shift();
             arrB.push(item);            
-        })();
+        })();       
 
-        restItems = correctData.length;
+        availableQuantity.innerHTML = correctData.length;        
 
-        availableQuantity.innerHTML = restItems;
-        console.log(restItems);
-
-     
-
-        if (restItems === 0) {
+        if (correctData.length === 0) {
             btn.style['background-color'] = 'gray';
             btn.removeEventListener("click", init);
-            btn.addEventListener("click", message);
+            btn.addEventListener("click", () => $("#myModal").modal());
         }
 
        
 
         // методом шаблонных строк
-        function usingSecondWay() { 
+        (function usingSecondWay() { 
             let currnetRes = '';
 
             arrB.forEach(item => {
@@ -100,9 +91,7 @@
                 currnetRes += secondItemTemplate;
             });
             secondBlock.innerHTML = currnetRes;
-        };
-
-        usingSecondWay();
+        })();      
     }
 
     btn.addEventListener("click", init);
