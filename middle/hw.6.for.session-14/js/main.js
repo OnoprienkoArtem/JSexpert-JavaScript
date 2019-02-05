@@ -1,12 +1,10 @@
-(function () {   
-
-
-    let btn = document.getElementById("play");
+(function () {  
+    let btn = document.getElementById('play');
     let secondBlock = document.querySelector('#second-line');
-
+    let removeItem = document.querySelector('#remove-item');
     let availableQuantity = document.querySelector('#availableQuantity');
 
-
+    
     const newData = createCopy(data);
 
     function createCopy(array) {
@@ -48,16 +46,12 @@
         });
     }
 
-
-
     
     const arrB = [];    
   
     availableQuantity.innerHTML = correctData.length;
 
-    function init() { 
-
-    
+    function init() {     
 
         (function bringItemToB() {
             let item = correctData.shift();
@@ -68,10 +62,17 @@
 
         if (correctData.length === 0) {
             btn.style['background-color'] = 'gray';
-            btn.removeEventListener("click", init);
-            btn.addEventListener("click", () => $("#myModal").modal());
+            btn.removeEventListener('click', init);
+            btn.addEventListener('click', () => $('#myModal').modal());
         }
 
+        function removeurrentItem() {
+            event.stopPropagation()
+            console.log(event.target.id);
+        }
+
+
+        secondBlock.addEventListener('click', removeurrentItem);
        
 
         // методом шаблонных строк
@@ -87,6 +88,7 @@
                             <div class="text-muted top-padding">${item.description}</div>
                             <div class="text-muted">${item.date}</div>
                         </div>
+                        <button class="btn btn-primary" id="remove-${item.name}">Удалить</button>
                     </div>`;
                 currnetRes += secondItemTemplate;
             });
@@ -95,4 +97,8 @@
     }
 
     btn.addEventListener("click", init);
+
+
+
+
 })();

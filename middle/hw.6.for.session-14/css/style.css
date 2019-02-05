@@ -2,6 +2,11 @@ body {
     overflow: overlay;
 }
 
+.btn-primary:active:focus,
+.btn-primary:focus {
+    outline: none;
+}
+
 .site-wrapper {
     margin-top: 60px;
 }
@@ -16,15 +21,10 @@ body {
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-
 .info-wrapper {
     padding: 5px;
     text-align: left;
 }
-
-/* .count-selector {
-    width:50%;
-} */
 
 .top-padding {
     padding-top: 5px;
@@ -33,7 +33,6 @@ body {
 .card {
     margin-bottom: 15px;
 }
-
 
 .info-block {
     display: flex;
