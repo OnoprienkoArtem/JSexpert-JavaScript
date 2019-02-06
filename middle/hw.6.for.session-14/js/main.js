@@ -1,7 +1,7 @@
 (function () {  
     let btn = document.getElementById('play');
     let secondBlock = document.querySelector('#second-line');
-    // let removeItem = document.querySelector('#remove-item');
+    
     let availableQuantity = document.querySelector('#availableQuantity');
 
     
@@ -53,6 +53,9 @@
   
     availableQuantity.innerHTML = correctData.length;
 
+
+
+
     function init() {     
 
         (function bringItemToB() {
@@ -68,22 +71,20 @@
             btn.addEventListener('click', () => $('#myModal').modal());
         }
 
-
-      
+  
 
         function removeurrentItem() {           
-            chousenEl = event.target.id;                     
+            let chousenEl = event.target; 
+            console.log(chousenEl);
         }
 
       
-
-
         let lineWrap = document.querySelector('#line-wrap');
         lineWrap.addEventListener('click', removeurrentItem);
 
-        let currentEllement = document.getElementById('card' + chousenEl);
+        // let currentEllement = document.getElementById('card' + chousenEl);
        
-        console.log(currentEllement);
+        // console.log(currentEllement);
 
 
         // методом шаблонных строк
@@ -92,7 +93,7 @@
 
             arrB.forEach(item => {
                 let secondItemTemplate = `
-                    <div class="col-sm-3 col-xs-6 card" id="card-${item.name}">
+                    <div class="col-sm-3 col-xs-6 card" id="card">
                         <img src="${item.url}" alt="${item.name}" class="img-thumbnail">
                         <div class="info-wrapper">
                             <div class="text-muted">${item.name}</div>
