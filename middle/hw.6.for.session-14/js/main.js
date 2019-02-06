@@ -1,9 +1,11 @@
 (function () {  
     let btn = document.getElementById('play');
     let secondBlock = document.querySelector('#second-line');
-    let removeItem = document.querySelector('#remove-item');
+    // let removeItem = document.querySelector('#remove-item');
     let availableQuantity = document.querySelector('#availableQuantity');
 
+    
+  
     
     const newData = createCopy(data);
 
@@ -66,14 +68,23 @@
             btn.addEventListener('click', () => $('#myModal').modal());
         }
 
-        function removeurrentItem() {
-            event.stopPropagation()
-            console.log(event.target.id);
+
+      
+
+        function removeurrentItem() {           
+            chousenEl = event.target.id;                     
         }
 
+      
 
-        secondBlock.addEventListener('click', removeurrentItem);
+
+        let lineWrap = document.querySelector('#line-wrap');
+        lineWrap.addEventListener('click', removeurrentItem);
+
+        let currentEllement = document.getElementById('card' + chousenEl);
        
+        console.log(currentEllement);
+
 
         // методом шаблонных строк
         (function usingSecondWay() { 
@@ -81,14 +92,14 @@
 
             arrB.forEach(item => {
                 let secondItemTemplate = `
-                    <div class="col-sm-3 col-xs-6 card">
+                    <div class="col-sm-3 col-xs-6 card" id="card-${item.name}">
                         <img src="${item.url}" alt="${item.name}" class="img-thumbnail">
                         <div class="info-wrapper">
                             <div class="text-muted">${item.name}</div>
                             <div class="text-muted top-padding">${item.description}</div>
                             <div class="text-muted">${item.date}</div>
                         </div>
-                        <button class="btn btn-primary" id="remove-${item.name}">Удалить</button>
+                        <button class="btn btn-primary" id="${item.name}">Удалить</button>
                     </div>`;
                 currnetRes += secondItemTemplate;
             });
