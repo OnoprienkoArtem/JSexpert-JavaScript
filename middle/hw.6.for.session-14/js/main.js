@@ -2,9 +2,11 @@
     let btn = document.getElementById('play');
     let secondBlock = document.querySelector('#second-line');    
     let availableQuantity = document.querySelector('#availableQuantity');
+    let cardWrap = document.querySelector('#card-wrap'); 
 
-    
   
+    const itemsOfGallery = [];
+
     // новый массив данных
     const newData = createCopy(data);
     function createCopy(array) {
@@ -50,7 +52,7 @@
 
     availableQuantity.innerHTML = correctData.length;
 
-    const itemsOfGallery = [];   
+ 
 
     function disabledAddButton() {
         if (correctData.length === 0) {
@@ -69,15 +71,35 @@
         let item = correctData.shift();  
         itemsOfGallery.push(item);
         availableQuantity.innerHTML = (correctData.length + 1) - 1;
+
         showItemsGallery();
         disabledAddButton();
         
         console.log('default', correctData);
         console.log('gallery', itemsOfGallery);
     }; 
-  
+ 
 
-    // методом шаблонных строк
+    function removeurrentItem(e) {   
+        // let item = itemsOfGallery.splice(e.target.id - 1, 1);           
+        // correctData.push(item[0]);
+        
+        // console.log(e.target.id - 1);        
+
+
+
+
+
+        showItemsGallery();
+        disabledAddButton();
+
+        console.log('default', correctData);
+        console.log('gallery', itemsOfGallery);
+    } 
+
+
+
+
     function showItemsGallery() {
         let currnetRes = '';
 
@@ -97,26 +119,8 @@
         secondBlock.innerHTML = currnetRes;
     };
 
-
-
-    let cardWrap = document.querySelector('#card-wrap');
-    cardWrap.addEventListener('click', removeurrentItem);
-
-    function removeurrentItem(e) {   
-        let item = itemsOfGallery.splice(e.target.id - 1, 1);           
-        correctData.push(item[0]);
-        showItemsGallery();
-        disabledAddButton();
-
-        console.log('default', correctData);
-        console.log('gallery', itemsOfGallery);
-    } 
-
-   
-
-
     
-
+    cardWrap.addEventListener('click', removeurrentItem);
     btn.addEventListener("click", bringItemToB);
 
 
