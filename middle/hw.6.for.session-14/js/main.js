@@ -11,6 +11,7 @@
         const newData = [];
         array.forEach(item => {
             newData.push({
+                id: item.id,
                 url: item.url,
                 name: item.name,
                 description: item.description,
@@ -20,7 +21,7 @@
         return newData;
     };
 
-    // подготовленный массив 
+    // подготовленный массив данных
     const correctData = newCorrectData(newData);
     function newCorrectData(arr) {
         return arr.map(item => {
@@ -37,6 +38,7 @@
             };
 
             return {
+                id: item.id,
                 url: itemUrl,
                 name: itemName,
                 description: itemDescription,
@@ -46,33 +48,38 @@
     }
 
 
+    availableQuantity.innerHTML = correctData.length;
+
+    const itemsOfGallery = [];   
+
+    function disabledAddButton() {
+        if (correctData.length === 0) {
+            btn.style['background-color'] = 'gray';
+            btn.removeEventListener('click', bringItemToB);
+            btn.addEventListener('click', () => $('#myModal').modal());
+        } else {
+            btn.style['background-color'] = '#337ab7';
+            btn.addEventListener("click", bringItemToB);
+        }
+    }
 
     
-    const itemsOfGallery = [];    
-  
-    availableQuantity.innerHTML = correctData.length;
-   
 
     function bringItemToB() {
-        let item = correctData.shift();
+        let item = correctData.shift();  
         itemsOfGallery.push(item);
         availableQuantity.innerHTML = (correctData.length + 1) - 1;
         showItemsGallery();
-    };       
-
-         
-
-    if (correctData.length === 0) {
-        btn.style['background-color'] = 'gray';
-        btn.removeEventListener('click', init);
-        btn.addEventListener('click', () => $('#myModal').modal());
-    }
-
+        disabledAddButton();
+        
+        console.log('default', correctData);
+        console.log('gallery', itemsOfGallery);
+    }; 
   
 
     // методом шаблонных строк
     function showItemsGallery() {
-            let currnetRes = '';
+        let currnetRes = '';
 
         itemsOfGallery.forEach(item => {
             let secondItemTemplate = `
@@ -83,7 +90,7 @@
                         <div class="text-muted top-padding">${item.description}</div>
                         <div class="text-muted">${item.date}</div>
                     </div>
-                    <button class="btn btn-primary" id="${item.name}">Удалить</button>
+                    <button class="btn btn-primary" id="${item.id}">Удалить</button>
                 </div>`;
             currnetRes += secondItemTemplate;
         });
@@ -92,9 +99,18 @@
 
 
 
-        // let lineWrap = document.querySelector('#card');
-        // lineWrap.addEventListener('click', removeurrentItem);
+    let cardWrap = document.querySelector('#card-wrap');
+    cardWrap.addEventListener('click', removeurrentItem);
 
+    function removeurrentItem(e) {   
+        let item = itemsOfGallery.splice(e.target.id - 1, 1);           
+        correctData.push(item[0]);
+        showItemsGallery();
+        disabledAddButton();
+
+        console.log('default', correctData);
+        console.log('gallery', itemsOfGallery);
+    } 
 
    
 
