@@ -4,8 +4,8 @@
     let availableQuantity = document.querySelector('#availableQuantity');
     let cardWrap = document.querySelector('#card-wrap'); 
 
-  
-    const itemsOfGallery = [];
+    const itemsGetinFromGallery = [];
+    const itemsForGallery = [];
 
     // новый массив данных
     const newData = createCopy(data);
@@ -69,24 +69,41 @@
 
     function bringItemToB() {
         let item = correctData.shift();  
-        itemsOfGallery.push(item);
+        itemsForGallery.push(item);
         availableQuantity.innerHTML = (correctData.length + 1) - 1;
 
         showItemsGallery();
         disabledAddButton();
         
         console.log('default', correctData);
-        console.log('gallery', itemsOfGallery);
+        console.log('gallery', itemsForGallery);
     }; 
  
 
-    function removeurrentItem(e) {   
-        // let item = itemsOfGallery.splice(e.target.id - 1, 1);           
-        // correctData.push(item[0]);
+    function removeurrentItem(e) {         
+        let elem = itemsForGallery.filter(item => {            
+            return item.id == e.target.id;            
+        });     
+
+        itemsForGallery.forEach((item, i)=> {  
+
+            if(item.id === elem[0].id) {
+         
+                itemsForGallery.splice(i, 1);
+            };
+        });
+
+
+        itemsGetinFromGallery.push(elem[0]);
+
+       
         
-        // console.log(e.target.id - 1);        
+       
+        itemsGetinFromGallery.sort((a, b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
+        
+        console.log(itemsGetinFromGallery);
 
-
+        
 
 
 
@@ -94,7 +111,7 @@
         disabledAddButton();
 
         console.log('default', correctData);
-        console.log('gallery', itemsOfGallery);
+        console.log('gallery', itemsForGallery);
     } 
 
 
@@ -103,7 +120,7 @@
     function showItemsGallery() {
         let currnetRes = '';
 
-        itemsOfGallery.forEach(item => {
+        itemsForGallery.forEach(item => {
             let secondItemTemplate = `
                 <div class="col-sm-3 col-xs-6 card" id="card">
                     <img src="${item.url}" alt="${item.name}" class="img-thumbnail">
