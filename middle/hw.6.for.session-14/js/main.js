@@ -4,7 +4,7 @@
     let availableQuantity = document.querySelector('#availableQuantity');
     let cardWrap = document.querySelector('#card-wrap'); 
 
-    const itemsGetinFromGallery = [];
+    // const itemsGetinFromGallery = [];
     const itemsForGallery = [];
 
     // новый массив данных
@@ -49,19 +49,25 @@
         });
     }
 
+    let lengthCorectData = correctData.length;
+    availableQuantity.innerHTML = lengthCorectData;
 
-    availableQuantity.innerHTML = correctData.length;
+    console.log('lenght', lengthCorectData);
 
- 
+    function showModal() {
+        $('#myModal').modal();
+    }
 
     function disabledAddButton() {
-        if (correctData.length === 0) {
+        console.log('lenght', lengthCorectData);
+        if (lengthCorectData === 0) {
             btn.style['background-color'] = 'gray';
             btn.removeEventListener('click', bringItemToB);
-            btn.addEventListener('click', () => $('#myModal').modal());
+            btn.addEventListener('click', showModal);
         } else {
             btn.style['background-color'] = '#337ab7';
             btn.addEventListener("click", bringItemToB);
+            btn.removeEventListener('click', showModal);
         }
     }
 
@@ -70,48 +76,34 @@
     function bringItemToB() {
         let item = correctData.shift();  
         itemsForGallery.push(item);
-        availableQuantity.innerHTML = (correctData.length + 1) - 1;
+        availableQuantity.innerHTML = --lengthCorectData;
 
         showItemsGallery();
         disabledAddButton();
         
-        console.log('default', correctData);
-        console.log('gallery', itemsForGallery);
+        // console.log('default', correctData);
+        // console.log('gallery', itemsForGallery);
     }; 
  
 
-    function removeurrentItem(e) {         
-        let elem = itemsForGallery.filter(item => {            
-            return item.id == e.target.id;            
-        });     
+    function removeurrentItem(e) {  
+        availableQuantity.innerHTML = ++lengthCorectData;
+        let elem = itemsForGallery.filter(item => item.id == e.target.id);     
 
         itemsForGallery.forEach((item, i)=> {  
-
-            if(item.id === elem[0].id) {
-         
+            if(item.id === elem[0].id) {         
                 itemsForGallery.splice(i, 1);
             };
         });
 
-
-        itemsGetinFromGallery.push(elem[0]);
-
-       
-        
-       
-        itemsGetinFromGallery.sort((a, b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
-        
-        console.log(itemsGetinFromGallery);
-
-        
-
-
+        correctData.push(elem[0]); 
+        correctData.sort((a, b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));  
 
         showItemsGallery();
         disabledAddButton();
-
-        console.log('default', correctData);
-        console.log('gallery', itemsForGallery);
+       
+        // console.log('default', correctData);
+        // console.log('gallery', itemsForGallery);
     } 
 
 
