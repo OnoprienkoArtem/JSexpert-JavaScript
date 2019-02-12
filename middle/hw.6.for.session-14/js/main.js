@@ -5,10 +5,7 @@
     let cardWrap = document.querySelector('#card-wrap'); 
     let sortSellect = document.querySelector('#sort'); 
 
-
-    const itemsForGallery = [];
-
-        
+    const itemsForGallery = [];        
 
     // новый массив данных
     const newData = createCopy(data);
@@ -37,13 +34,6 @@
 
             let itemDescription = `${item.description.substr(0, 15)}...`;
 
-            // const getDateObject = date => {
-            //     let tmp = new Date(date);
-            //     return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
-            // };
-            
-            // getDateObject(item.date)
-
             return {
                 id: item.id,
                 url: itemUrl,
@@ -56,8 +46,6 @@
 
     let lengthCorectData = correctData.length;
     availableQuantity.innerHTML = lengthCorectData;
-
-
 
     function showModal() {
         $('#myModal').modal();
@@ -102,6 +90,11 @@
         disabledAddButton();  
     }; 
 
+    function getCorrectDate(date) {
+       let tmp = new Date(date);
+       return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
+    };
+
     function showItemsGallery() {
         let currnetRes = ''; 
 
@@ -113,7 +106,7 @@
                         <div class="info-wrapper">
                             <div class="text-muted">${item.name}</div>
                             <div class="text-muted top-padding">${item.description}</div>
-                            <div class="text-muted">${item.date}</div>
+                            <div class="text-muted">${getCorrectDate(item.date)}</div>
                         </div>
                         <button class="btn btn-primary" id="${item.id}">Удалить</button>
                     </div>
