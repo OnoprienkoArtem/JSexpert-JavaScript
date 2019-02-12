@@ -79,8 +79,7 @@
         availableQuantity.innerHTML = --lengthCorectData;
 
         showItemsGallery();       
-        disabledAddButton();  
-        console.log(itemsForGallery);
+        disabledAddButton();         
     };  
 
     function removeurrentItem(e) {  
@@ -93,18 +92,14 @@
             };
         });
 
-        correctData.push(elem[0]); 
-        correctData.sort((a, b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));  
-
         showItemsGallery();
         disabledAddButton();  
     }; 
 
     function showItemsGallery() {
-        let currnetRes = '';
+        let currnetRes = '';     
 
-        itemsForGallery.sort((a, b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0)).reverse();
-        // sorting(itemsForGallery);
+        sorting(itemsForGallery);  
 
         itemsForGallery.forEach(item => {
             let secondItemTemplate = `
@@ -122,14 +117,12 @@
         
         gallery.innerHTML = currnetRes;
     };
-
-
-    sortSellect.addEventListener('change', showItemsGallery());
-
-
+ 
+    
     function sorting(data) {
-        let sortTypeValue = sortSellect.value
-
+        let sortTypeValue = parseInt(sortSellect.value, 10);
+        console.log(sortTypeValue);
+        console.log(data);
         switch (sortTypeValue) {
             case 1:
                 return data.reverse();
@@ -139,9 +132,11 @@
                 return data.sort((a, b) => Number(a.date) - Number(b.date));
             case 0:
             default:
-                return data;
+                return data.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
         }
     }
+
+    sortSellect.addEventListener('change', showItemsGallery);
 
     
     cardWrap.addEventListener('click', removeurrentItem);
