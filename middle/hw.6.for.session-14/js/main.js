@@ -98,6 +98,8 @@
     function showItemsGallery() {
         let currnetRes = ''; 
 
+        console.log(itemsForGallery);
+
         itemsForGallery.forEach(item => {
             let secondItemTemplate = `
                 <div class="col-sm-3 col-xs-6">
@@ -114,15 +116,15 @@
             currnetRes += secondItemTemplate;
         });          
         gallery.innerHTML = currnetRes;
-    };
- 
+    }; 
     
     function sorting() {
         let sortTypeValue = parseInt(sortSellect.value, 10);
+        
    
         switch (sortTypeValue) {
             case 1:
-                showItemsGallery(itemsForGallery.reverse());                
+                showItemsGallery(itemsForGallery.sort((a, b) => (b.name > a.name) ? 1 : ((a.name > b.name) ? -1 : 0)));
             case 2:
                 return itemsForGallery.sort((a, b) => Number(b.date) - Number(a.date));
             case 3:
