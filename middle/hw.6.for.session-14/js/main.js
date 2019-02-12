@@ -1,10 +1,9 @@
 (function () {  
     let btn = document.getElementById('play');
-    let secondBlock = document.querySelector('#second-line');    
+    let gallery = document.querySelector('#gallery');
     let availableQuantity = document.querySelector('#availableQuantity');
     let cardWrap = document.querySelector('#card-wrap'); 
-
-    // const itemsGetinFromGallery = [];
+    
     const itemsForGallery = [];
 
     // новый массив данных
@@ -47,19 +46,17 @@
                 date: getDateObject(item.date)
             };
         });
-    }
+    };
 
     let lengthCorectData = correctData.length;
     availableQuantity.innerHTML = lengthCorectData;
 
-    console.log('lenght', lengthCorectData);
 
     function showModal() {
         $('#myModal').modal();
-    }
+    };
 
-    function disabledAddButton() {
-        console.log('lenght', lengthCorectData);
+    function disabledAddButton() {       
         if (lengthCorectData === 0) {
             btn.style['background-color'] = 'gray';
             btn.removeEventListener('click', bringItemToB);
@@ -69,9 +66,7 @@
             btn.addEventListener("click", bringItemToB);
             btn.removeEventListener('click', showModal);
         }
-    }
-
-    
+    };    
 
     function bringItemToB() {
         let item = correctData.shift();  
@@ -79,12 +74,8 @@
         availableQuantity.innerHTML = --lengthCorectData;
 
         showItemsGallery();
-        disabledAddButton();
-        
-        // console.log('default', correctData);
-        // console.log('gallery', itemsForGallery);
-    }; 
- 
+        disabledAddButton();  
+    };  
 
     function removeurrentItem(e) {  
         availableQuantity.innerHTML = ++lengthCorectData;
@@ -100,14 +91,8 @@
         correctData.sort((a, b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));  
 
         showItemsGallery();
-        disabledAddButton();
-       
-        // console.log('default', correctData);
-        // console.log('gallery', itemsForGallery);
-    } 
-
-
-
+        disabledAddButton();  
+    }; 
 
     function showItemsGallery() {
         let currnetRes = '';
@@ -125,7 +110,7 @@
                 </div>`;
             currnetRes += secondItemTemplate;
         });
-        secondBlock.innerHTML = currnetRes;
+        gallery.innerHTML = currnetRes;
     };
 
     
