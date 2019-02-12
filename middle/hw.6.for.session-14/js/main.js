@@ -92,14 +92,15 @@
             };
         });
 
+        correctData.push(elem[0]); 
+        // correctData.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+
         showItemsGallery();
         disabledAddButton();  
     }; 
 
     function showItemsGallery() {
-        let currnetRes = '';     
-
-        sorting(itemsForGallery);  
+        let currnetRes = ''; 
 
         itemsForGallery.forEach(item => {
             let secondItemTemplate = `
@@ -113,32 +114,28 @@
                     <button class="btn btn-primary" id="${item.id}">Удалить</button>
                 </div>`;
             currnetRes += secondItemTemplate;
-        });  
-        
+        });          
         gallery.innerHTML = currnetRes;
     };
  
     
-    function sorting(data) {
+    function sorting() {
         let sortTypeValue = parseInt(sortSellect.value, 10);
-        console.log(sortTypeValue);
-        console.log(data);
+   
         switch (sortTypeValue) {
             case 1:
-                return data.reverse();
+                showItemsGallery(itemsForGallery.reverse());                
             case 2:
-                return data.sort((a, b) => Number(b.date) - Number(a.date));
+                return itemsForGallery.sort((a, b) => Number(b.date) - Number(a.date));
             case 3:
-                return data.sort((a, b) => Number(a.date) - Number(b.date));
+                return itemsForGallery.sort((a, b) => Number(a.date) - Number(b.date));
             case 0:
             default:
-                return data.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-        }
+                showItemsGallery(itemsForGallery.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)));               
+        }        
     }
 
-    sortSellect.addEventListener('change', showItemsGallery);
-
-    
+    sortSellect.addEventListener('change', sorting);    
     cardWrap.addEventListener('click', removeurrentItem);
     btn.addEventListener("click", bringItemToB);
 })();
