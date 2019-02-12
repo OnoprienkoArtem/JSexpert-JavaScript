@@ -3,8 +3,12 @@
     let gallery = document.querySelector('#gallery');
     let availableQuantity = document.querySelector('#availableQuantity');
     let cardWrap = document.querySelector('#card-wrap'); 
-    
+    let sortSellect = document.querySelector('#sort'); 
+
+
     const itemsForGallery = [];
+
+        
 
     // новый массив данных
     const newData = createCopy(data);
@@ -52,6 +56,7 @@
     availableQuantity.innerHTML = lengthCorectData;
 
 
+
     function showModal() {
         $('#myModal').modal();
     };
@@ -73,8 +78,9 @@
         itemsForGallery.push(item);
         availableQuantity.innerHTML = --lengthCorectData;
 
-        showItemsGallery();
+        showItemsGallery();       
         disabledAddButton();  
+        console.log(itemsForGallery);
     };  
 
     function removeurrentItem(e) {  
@@ -97,6 +103,9 @@
     function showItemsGallery() {
         let currnetRes = '';
 
+        itemsForGallery.sort((a, b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0)).reverse();
+        // sorting(itemsForGallery);
+
         itemsForGallery.forEach(item => {
             let secondItemTemplate = `
                 <div class="col-sm-3 col-xs-6 card" id="card">
@@ -109,15 +118,32 @@
                     <button class="btn btn-primary" id="${item.id}">Удалить</button>
                 </div>`;
             currnetRes += secondItemTemplate;
-        });
+        });  
+        
         gallery.innerHTML = currnetRes;
     };
+
+
+    sortSellect.addEventListener('change', showItemsGallery());
+
+
+    function sorting(data) {
+        let sortTypeValue = sortSellect.value
+
+        switch (sortTypeValue) {
+            case 1:
+                return data.reverse();
+            case 2:
+                return data.sort((a, b) => Number(b.date) - Number(a.date));
+            case 3:
+                return data.sort((a, b) => Number(a.date) - Number(b.date));
+            case 0:
+            default:
+                return data;
+        }
+    }
 
     
     cardWrap.addEventListener('click', removeurrentItem);
     btn.addEventListener("click", bringItemToB);
-
-
-
-
 })();
