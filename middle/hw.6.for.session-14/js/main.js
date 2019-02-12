@@ -37,17 +37,19 @@
 
             let itemDescription = `${item.description.substr(0, 15)}...`;
 
-            const getDateObject = date => {
-                let tmp = new Date(date);
-                return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
-            };
+            // const getDateObject = date => {
+            //     let tmp = new Date(date);
+            //     return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
+            // };
+            
+            // getDateObject(item.date)
 
             return {
                 id: item.id,
                 url: itemUrl,
                 name: itemName,
                 description: itemDescription,
-                date: getDateObject(item.date)
+                date: item.date
             };
         });
     };
@@ -83,17 +85,18 @@
     };  
 
     function removeurrentItem(e) {  
-        availableQuantity.innerHTML = ++lengthCorectData;
-        let elem = itemsForGallery.filter(item => item.id == e.target.id);     
+        if (e.target.id) {
+            availableQuantity.innerHTML = ++lengthCorectData;
+            let elem = itemsForGallery.filter(item => item.id == e.target.id);     
 
-        itemsForGallery.forEach((item, i)=> {  
-            if(item.id === elem[0].id) {         
-                itemsForGallery.splice(i, 1);
-            };
-        });
+            itemsForGallery.forEach((item, i)=> {  
+                if(item.id === elem[0].id) {         
+                    itemsForGallery.splice(i, 1);
+                };
+            });
 
-        correctData.push(elem[0]); 
-        // correctData.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+            correctData.push(elem[0]); 
+        }      
 
         showItemsGallery();
         disabledAddButton();  
@@ -104,14 +107,16 @@
 
         itemsForGallery.forEach(item => {
             let secondItemTemplate = `
-                <div class="col-sm-3 col-xs-6 card" id="card">
-                    <img src="${item.url}" alt="${item.name}" class="img-thumbnail">
-                    <div class="info-wrapper">
-                        <div class="text-muted">${item.name}</div>
-                        <div class="text-muted top-padding">${item.description}</div>
-                        <div class="text-muted">${item.date}</div>
+                <div class="col-sm-3 col-xs-6">
+                    <div class="card">
+                        <img src="${item.url}" alt="${item.name}" class="image">
+                        <div class="info-wrapper">
+                            <div class="text-muted">${item.name}</div>
+                            <div class="text-muted top-padding">${item.description}</div>
+                            <div class="text-muted">${item.date}</div>
+                        </div>
+                        <button class="btn btn-primary" id="${item.id}">Удалить</button>
                     </div>
-                    <button class="btn btn-primary" id="${item.id}">Удалить</button>
                 </div>`;
             currnetRes += secondItemTemplate;
         });          
