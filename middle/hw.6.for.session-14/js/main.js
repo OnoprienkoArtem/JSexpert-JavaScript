@@ -52,11 +52,7 @@
     };
 
     function disabledAddButton() {       
-        if (getArrayLength(correctData) === 0) {
-            btn.style['background-color'] = 'gray';           
-        } else {
-            btn.style['background-color'] = '#337ab7';            
-        }
+        getArrayLength(correctData) === 0 ?  btn.classList.add("inactive") : btn.classList.remove("inactive");       
     };   
 
     function getArrayLength(data) {
