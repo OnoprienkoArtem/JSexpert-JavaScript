@@ -53,13 +53,9 @@
 
     function disabledAddButton() {       
         if (getArrayLength(correctData) === 0) {
-            btn.style['background-color'] = 'gray';
-            // btn.removeEventListener('click', bringItemToB);
-            // btn.addEventListener('click', showModal);
+            btn.style['background-color'] = 'gray';           
         } else {
-            btn.style['background-color'] = '#337ab7';
-            // btn.addEventListener("click", bringItemToB);
-            // btn.removeEventListener('click', showModal);
+            btn.style['background-color'] = '#337ab7';            
         }
     };   
 
@@ -83,13 +79,12 @@
 
     function removeurrentItem(e) { 
         let id = +e.target.getAttribute('data-id');
-        if (id) {
-            availableQuantity.innerHTML = getArrayLength(correctData);
+        if (id) {            
             let elem = itemsForGallery.find(item => item.id === id);   
             itemsForGallery = itemsForGallery.filter(item => item.id !== id);  
-            correctData.push(elem); 
+            correctData.push(elem);             
         }      
-
+        availableQuantity.innerHTML = getArrayLength(correctData);
         showItemsGallery();
         disabledAddButton();  
     }; 
@@ -118,14 +113,11 @@
         });          
         gallery.innerHTML = currnetRes;
     }; 
-
-
     
     function sorting(arr) {
         let sortTypeValue = parseInt(sortSellect.value, 10); 
    
-        switch (sortTypeValue) {
-            
+        switch (sortTypeValue) {            
             case 1:
                 return arr.sort((a, b) => (b.name > a.name) ? 1 : ((a.name > b.name) ? -1 : 0));
             case 2:
@@ -139,7 +131,7 @@
 
     function sortListener() {
         showItemsGallery();
-    }
+    };
 
     sortSellect.addEventListener('change', sortListener);
     cardWrap.addEventListener('click', removeurrentItem);
