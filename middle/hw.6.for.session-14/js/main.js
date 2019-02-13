@@ -5,10 +5,11 @@
     let cardWrap = document.querySelector('#card-wrap'); 
     let sortSellect = document.querySelector('#sort'); 
 
-    const itemsForGallery = [];        
+    let itemsForGallery = [];        
 
     // новый массив данных
     const newData = createCopy(data);
+
     function createCopy(array) {
         const newData = [];
         array.forEach(item => {
@@ -43,47 +44,50 @@
             };
         });
     };
-
-    let lengthCorectData = correctData.length;
-    availableQuantity.innerHTML = lengthCorectData;
+    
+    availableQuantity.innerHTML = getArrayLength(correctData);
 
     function showModal() {
         $('#myModal').modal();
     };
 
     function disabledAddButton() {       
-        if (lengthCorectData === 0) {
+        if (getArrayLength(correctData) === 0) {
             btn.style['background-color'] = 'gray';
-            btn.removeEventListener('click', bringItemToB);
-            btn.addEventListener('click', showModal);
+            // btn.removeEventListener('click', bringItemToB);
+            // btn.addEventListener('click', showModal);
         } else {
             btn.style['background-color'] = '#337ab7';
-            btn.addEventListener("click", bringItemToB);
-            btn.removeEventListener('click', showModal);
+            // btn.addEventListener("click", bringItemToB);
+            // btn.removeEventListener('click', showModal);
         }
-    };    
+    };   
+
+    function getArrayLength(data) {
+        return data.length;
+    } 
 
     function bringItemToB() {
-        let item = correctData.shift();  
-        itemsForGallery.push(item);
-        availableQuantity.innerHTML = --lengthCorectData;
+        if (!getArrayLength(correctData)) {
+            showModal();
+        } else {
+            let item = correctData.shift();
+            itemsForGallery.push(item);
 
-        showItemsGallery();       
-        disabledAddButton();         
+            availableQuantity.innerHTML = getArrayLength(correctData);
+            showItemsGallery(); 
+        }   
+
+        disabledAddButton();       
     };  
 
-    function removeurrentItem(e) {  
-        if (e.target.id) {
-            availableQuantity.innerHTML = ++lengthCorectData;
-            let elem = itemsForGallery.filter(item => item.id == e.target.id);     
-
-            itemsForGallery.forEach((item, i)=> {  
-                if(item.id === elem[0].id) {         
-                    itemsForGallery.splice(i, 1);
-                };
-            });
-
-            correctData.push(elem[0]); 
+    function removeurrentItem(e) { 
+        let id = +e.target.getAttribute('data-id');
+        if (id) {
+            availableQuantity.innerHTML = getArrayLength(correctData);
+            let elem = itemsForGallery.find(item => item.id === id);   
+            itemsForGallery = itemsForGallery.filter(item => item.id !== id);  
+            correctData.push(elem); 
         }      
 
         showItemsGallery();
@@ -96,12 +100,10 @@
     };
 
     function showItemsGallery() {
-        let currnetRes = ''; 
-
-        console.log(itemsForGallery);
-
+        let currnetRes = '';          
+        itemsForGallery = sorting(itemsForGallery);
         itemsForGallery.forEach(item => {
-            let secondItemTemplate = `
+            currnetRes += `
                 <div class="col-sm-3 col-xs-6">
                     <div class="card">
                         <img src="${item.url}" alt="${item.name}" class="image">
@@ -110,32 +112,36 @@
                             <div class="text-muted top-padding">${item.description}</div>
                             <div class="text-muted">${getCorrectDate(item.date)}</div>
                         </div>
-                        <button class="btn btn-primary" id="${item.id}">Удалить</button>
+                        <button class="btn btn-primary" data-id="${item.id}">Удалить</button>
                     </div>
-                </div>`;
-            currnetRes += secondItemTemplate;
+                </div>`;            
         });          
         gallery.innerHTML = currnetRes;
     }; 
+
+
     
-    function sorting() {
-        let sortTypeValue = parseInt(sortSellect.value, 10);
-        
+    function sorting(arr) {
+        let sortTypeValue = parseInt(sortSellect.value, 10); 
    
         switch (sortTypeValue) {
+            
             case 1:
-                showItemsGallery(itemsForGallery.sort((a, b) => (b.name > a.name) ? 1 : ((a.name > b.name) ? -1 : 0)));
+                return arr.sort((a, b) => (b.name > a.name) ? 1 : ((a.name > b.name) ? -1 : 0));
             case 2:
-                return itemsForGallery.sort((a, b) => Number(b.date) - Number(a.date));
+                return arr.sort((a, b) => b.date - a.date);
             case 3:
-                return itemsForGallery.sort((a, b) => Number(a.date) - Number(b.date));
-            case 0:
-            default:
-                showItemsGallery(itemsForGallery.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)));               
+                return arr.sort((a, b) => a.date - b.date);
+            case 0:         
+                return arr.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));               
         }        
     }
 
-    sortSellect.addEventListener('change', sorting);    
+    function sortListener() {
+        showItemsGallery();
+    }
+
+    sortSellect.addEventListener('change', sortListener);
     cardWrap.addEventListener('click', removeurrentItem);
     btn.addEventListener("click", bringItemToB);
 })();
