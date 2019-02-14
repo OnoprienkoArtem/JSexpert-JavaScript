@@ -6,11 +6,12 @@
     let sortSellect = document.querySelector('#sort'); 
 
     let itemsForGallery = [];        
+    const newData = createDataClone(data);
+    const correctData = createNewCorrectData(newData);   
 
-    // новый массив данных
-    const newData = createCopy(data);
+    availableQuantity.innerHTML = getArrayLength(correctData);
 
-    function createCopy(array) {
+    function createDataClone(array) {
         const newData = [];
         array.forEach(item => {
             newData.push({
@@ -23,10 +24,8 @@
         });
         return newData;
     };
-
-    // подготовленный массив данных
-    const correctData = newCorrectData(newData);
-    function newCorrectData(arr) {
+   
+    function createNewCorrectData(arr) {
         return arr.map(item => {
             let itemName = item.name.toLowerCase();
             itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
@@ -43,15 +42,13 @@
                 date: item.date
             };
         });
-    };
-    
-    availableQuantity.innerHTML = getArrayLength(correctData);
+    };    
 
     function showModal() {
         $('#myModal').modal();
     };
 
-    function disabledAddButton() {       
+    function disabledButton() {       
         getArrayLength(correctData) === 0 ?  btn.classList.add("inactive") : btn.classList.remove("inactive");       
     };   
 
@@ -59,7 +56,7 @@
         return data.length;
     } 
 
-    function bringItemToB() {
+    function addItemToGallery() {
         if (!getArrayLength(correctData)) {
             showModal();
         } else {
@@ -67,13 +64,13 @@
             itemsForGallery.push(item);
 
             availableQuantity.innerHTML = getArrayLength(correctData);
-            showItemsGallery(); 
+            showGallery(); 
         }   
 
-        disabledAddButton();       
+        disabledButton();       
     };  
 
-    function removeurrentItem(e) { 
+    function removeCurrentItem(e) { 
         let id = +e.target.getAttribute('data-id');
         if (id) {            
             let elem = itemsForGallery.find(item => item.id === id);   
@@ -81,8 +78,8 @@
             correctData.push(elem);             
         }      
         availableQuantity.innerHTML = getArrayLength(correctData);
-        showItemsGallery();
-        disabledAddButton();  
+        showGallery();
+        disabledButton();  
     }; 
 
     function getCorrectDate(date) {
@@ -90,7 +87,7 @@
        return `${tmp.getFullYear()}/${tmp.getMonth()}/${tmp.getDate()} ${tmp.getHours()}:${tmp.getMinutes()}`;
     };
 
-    function showItemsGallery() {
+    function showGallery() {
         let currnetRes = '';          
         itemsForGallery = sorting(itemsForGallery);
         itemsForGallery.forEach(item => {
@@ -126,10 +123,10 @@
     }
 
     function sortListener() {
-        showItemsGallery();
+        showGallery();
     };
 
     sortSellect.addEventListener('change', sortListener);
-    cardWrap.addEventListener('click', removeurrentItem);
-    btn.addEventListener("click", bringItemToB);
+    cardWrap.addEventListener('click', removeCurrentItem);
+    btn.addEventListener("click", addItemToGallery);
 })();
