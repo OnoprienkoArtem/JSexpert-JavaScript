@@ -124,9 +124,22 @@
 
     function sortListener() {
         showGallery();
+    };    
+
+    function setStorageSortType() {
+        let sortTypeValue = parseInt(sortSellect.value, 10);
+        localStorage.setItem("sortType", sortTypeValue);
     };
+
+    (function checkSortTypeInStorage() {
+        let sortTypeValue = localStorage.getItem("sortType");
+        if (sortTypeValue) {
+            sortSellect.value = sortTypeValue;
+        }
+    })();    
 
     sortSellect.addEventListener('change', sortListener);
     cardWrap.addEventListener('click', removeCurrentItem);
     btn.addEventListener("click", addItemToGallery);
+    window.addEventListener("beforeunload", setStorageSortType);
 })();
