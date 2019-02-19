@@ -20,6 +20,10 @@ function AuthModule(loginDafaultData) {
 	const inputPassword = document.querySelector('#inputPassword');
 	const errorMessage = document.querySelector('#alert');
 	const formBlock = document.querySelector('#formBlock');
+	const about = document.querySelector('#about');
+	const showPassword = document.querySelector('#showPassword');
+	const showEmail = document.querySelector('#showEmail');
+	
 	
 
 
@@ -38,8 +42,15 @@ function AuthModule(loginDafaultData) {
 
 		if (resulrValidation && (resLocalStorageEmail === inputEmail.value) && (resLocalStoragePass === inputPassword.value)) {		
 			formBlock.classList.add('hide');
+			about.classList.remove('hide');
+			showEmail.value = inputEmail.value;
+			showPassword.value = inputPassword.value;
+
+			showPassword.type = 'text';
 		}
 	};
+
+
 
 	function validationForm(mail, pass) {
 		if (mail.length === 0 || pass.length === 0) {
