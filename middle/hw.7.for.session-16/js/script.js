@@ -4,14 +4,13 @@ const loginDafaultData = {
 };
 
 const submit = document.querySelector('#submit');
+submit.addEventListener('click', () => auth.checkData());
 
-submit.addEventListener('click', (e) => {
-	// e.preventDefault();
-	obj.checkData();
-});
+const showString = document.querySelector('#showString');
+showString.addEventListener('click', () => auth.showPasswordString());
 
-
-
+const btnBack = document.querySelector('#btnBack');
+btnBack.addEventListener('click', () => auth.returnBack());
 
 
 function AuthModule(loginDafaultData) {
@@ -22,52 +21,49 @@ function AuthModule(loginDafaultData) {
 	const formBlock = document.querySelector('#formBlock');
 	const about = document.querySelector('#about');
 	const showPassword = document.querySelector('#showPassword');
-	const showEmail = document.querySelector('#showEmail');
-	
-	
+	const showEmail = document.querySelector('#showEmail');	
 
-
-	this.loginDafaultData = loginDafaultData;
-
-	this.setLocalStorageDafaultData = function () {
-		localStorage.setItem('inputEmail', this.loginDafaultData.inputEmail);
-		localStorage.setItem('password', this.loginDafaultData.password);
-	};
-
-
-	this.checkData = function () {
-		let resulrValidation = validationForm(inputEmail.value, inputPassword.value);
-		let resLocalStorageEmail = localStorage.getItem('inputEmail', this.loginDafaultData.inputEmail);
-		let resLocalStoragePass = localStorage.getItem('password', this.loginDafaultData.password);
-
-		if (resulrValidation && (resLocalStorageEmail === inputEmail.value) && (resLocalStoragePass === inputPassword.value)) {		
-			formBlock.classList.add('hide');
-			about.classList.remove('hide');
-			showEmail.value = inputEmail.value;
-			showPassword.value = inputPassword.value;
-
-			showPassword.type = 'text';
-		}
-	};
-
-
+	(function setLocalStorageDafaultData() {
+		localStorage.setItem('inputEmail', loginDafaultData.inputEmail);
+		localStorage.setItem('password', loginDafaultData.password);
+	})();
 
 	function validationForm(mail, pass) {
 		if (mail.length === 0 || pass.length === 0) {
 			errorMessage.classList.remove('hide');
 			return false;
 		} else {
-			errorMessage.classList.add('hide');	
-			return true;		
+			errorMessage.classList.add('hide');
+			return true;
 		}
 	};
 
+	this.checkData = function () {
+		let resulrValidation = validationForm(inputEmail.value, inputPassword.value);
+		let resLocalStorageEmail = localStorage.getItem('inputEmail', loginDafaultData.inputEmail);
+		let resLocalStoragePass = localStorage.getItem('password', loginDafaultData.password);
+		
+		if (resulrValidation && (resLocalStorageEmail === inputEmail.value) && (resLocalStoragePass === inputPassword.value)) {
+			formBlock.classList.add('hide');
+			about.classList.remove('hide');
+			showEmail.value = inputEmail.value;
+			showPassword.value = inputPassword.value;		
+		}		
+	};
 
-}
+	this.showPasswordString = function () {
+		showPassword.type = (showPassword.type === 'password') ? 'text' : 'password';		
+	};
+
+	this.returnBack = function() {
+		about.classList.add('hide');
+		formBlock.classList.remove('hide');
+	};
+};
 
 
-const obj = new AuthModule(loginDafaultData);
+const auth = new AuthModule(loginDafaultData);
 
-obj.setLocalStorageDafaultData();
 
-console.log(obj);
+
+console.log(auth);
