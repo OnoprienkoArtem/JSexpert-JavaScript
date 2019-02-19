@@ -11,6 +11,9 @@
 
     availableQuantity.innerHTML = getArrayLength(correctData);
 
+    console.log(correctData);
+    
+
     function createDataClone(array) {
         const newData = [];
         array.forEach(item => {
