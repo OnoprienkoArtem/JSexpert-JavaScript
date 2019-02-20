@@ -52,7 +52,9 @@ function AuthModule(loginDafaultData) {
 	};
 
 	this.showPasswordString = function () {
-		showPassword.type = (showPassword.type === 'password') ? 'text' : 'password';		
+		showPassword.type = (showPassword.type === 'password') ? 'text' : 'password';
+		showString.innerHTML = (showPassword.type === 'password') ? 'Показать пароль' : 'Скрыть пароль';
+		
 	};
 
 	this.returnBack = function() {
