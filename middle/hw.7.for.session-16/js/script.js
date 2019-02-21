@@ -3,16 +3,6 @@ const loginDafaultData = {
 	password: "art123"
 };
 
-const submit = document.querySelector('#submit');
-submit.addEventListener('click', () => auth.checkData());
-
-const showString = document.querySelector('#showString');
-showString.addEventListener('click', () => auth.showPasswordString());
-
-const btnBack = document.querySelector('#btnBack');
-btnBack.addEventListener('click', () => auth.returnBack());
-
-
 function AuthModule(loginDafaultData) {
 
 	const inputEmail = document.querySelector('#inputEmail');
@@ -22,11 +12,9 @@ function AuthModule(loginDafaultData) {
 	const about = document.querySelector('#about');
 	const showPassword = document.querySelector('#showPassword');
 	const showEmail = document.querySelector('#showEmail');	
-
-	(function setLocalStorageDafaultData() {
-		localStorage.setItem('inputEmail', loginDafaultData.inputEmail);
-		localStorage.setItem('password', loginDafaultData.password);
-	})();
+	const submit = document.querySelector('#submit');
+	const showString = document.querySelector('#showString');
+	const btnBack = document.querySelector('#btnBack');
 
 	function validationForm(mail, pass) {
 		if (mail.length === 0 || pass.length === 0) {
@@ -38,34 +26,49 @@ function AuthModule(loginDafaultData) {
 		}
 	};
 
-	this.checkData = function () {
-		let resulrValidation = validationForm(inputEmail.value, inputPassword.value);
-		let resLocalStorageEmail = localStorage.getItem('inputEmail', loginDafaultData.inputEmail);
-		let resLocalStoragePass = localStorage.getItem('password', loginDafaultData.password);
-		
-		if (resulrValidation && (resLocalStorageEmail === inputEmail.value) && (resLocalStoragePass === inputPassword.value)) {
-			formBlock.classList.add('hide');
-			about.classList.remove('hide');
-			showEmail.value = inputEmail.value;
-			showPassword.value = inputPassword.value;		
-		}		
+	const checkData = () => {
+		const email = inputEmail.value.trim();
+		const pass = inputPassword.value.trim();
+
+		const resultValidation = validationForm(email, pass);
+		const resLocalStorageEmail = localStorage.getItem("inputEmail");
+		const resLocalStoragePass = localStorage.getItem("password");
+
+		if (resultValidation && resLocalStorageEmail === email && resLocalStoragePass === pass) {
+			formBlock.classList.add("hide");
+			about.classList.remove("hide");
+			showEmail.value = email;
+			showPassword.value = pass;
+		}
 	};
 
-	this.showPasswordString = function () {
-		showPassword.type = (showPassword.type === 'password') ? 'text' : 'password';
-		showString.innerHTML = (showPassword.type === 'password') ? 'Показать пароль' : 'Скрыть пароль';
-		
-	};
-
-	this.returnBack = function() {
+	const returnBack = () => {
 		about.classList.add('hide');
 		formBlock.classList.remove('hide');
+	};
+
+	const showPasswordString = () => {
+		showPassword.type = showPassword.type === 'password' ? 'text' : 'password';
+		showString.innerHTML = showPassword.type === 'password' ? 'Показать пароль' : 'Скрыть пароль';
+	};
+
+	this.setLocalStorageDafaultData = function ({inputEmail, password}) {
+		localStorage.setItem('inputEmail', inputEmail);
+		localStorage.setItem('password', password);
+	};
+
+	this.initComponent = function () {
+		submit.addEventListener("click", checkData); 
+		showString.addEventListener("click", showPasswordString); 
+		btnBack.addEventListener("click", returnBack); 
 	};
 };
 
 
 const auth = new AuthModule(loginDafaultData);
 
+auth.setLocalStorageDafaultData(loginDafaultData);
+auth.initComponent();
 
 
 console.log(auth);
