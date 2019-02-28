@@ -1,6 +1,9 @@
 /* 
 *  Схема инициализации приложения
 */
+
+
+
 let validatorModule = new Validator();
 
 let galleryModule = new BaseGallery();
