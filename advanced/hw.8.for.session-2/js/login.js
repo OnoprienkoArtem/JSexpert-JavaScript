@@ -1,22 +1,22 @@
 /* 
-*  Схематическое изображение класса Логин формы
-*/
+ *  Схематическое изображение класса Логин формы
+ */
 
-let LoginForm = function (validatorModule, galleryModule) {	
+let LoginForm = function (validatorModule, galleryModule) {
 	this.validator = validatorModule;
 	this.gallery = galleryModule;
 }
 
 LoginForm.prototype = {
 
-	initComponent : function (){
+	initComponent: function () {
 		// code
 	},
-	validateUserData : function (){
+	validateUserData: function () {
 		this.validator.isValid();
 	},
 
-	showGallery: function(){
+	showGallery: function () {
 		this.gallery.init();
 	}
 }
