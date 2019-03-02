@@ -16,8 +16,8 @@ let LoginForm = function (validatorModule, galleryModule) {
 	const about = document.querySelector('#about');
 	const showPassword = document.querySelector('#showPassword');
 	const showEmail = document.querySelector('#showEmail');
-	const submit = document.querySelector('#submit');
-	const showString = document.querySelector('#showString');
+		const submit = document.querySelector('#submit');
+		const showString = document.querySelector('#showString');
 	const btnBack = document.querySelector('#btnBack');
 }
 
@@ -33,21 +33,59 @@ LoginForm.prototype = {
 		}
 	},
 
+	checkData: function () {
+		const email = inputEmail.value.trim();
+		const pass = inputPassword.value.trim();
 
-	initComponent: function () {
-		if (this.getUserAuthorized) {
-			this.showContent();
-		} else {
-			this.hideBlock();
-			this.login();
+		const resultValidation = validationForm(email, pass);
+		const resLocalStorageEmail = localStorage.getItem("inputEmail");
+		const resLocalStoragePass = localStorage.getItem("password");
+
+		if (resultValidation && resLocalStorageEmail === email && resLocalStoragePass === pass) {
+			formBlock.classList.add("hide");
+			about.classList.remove("hide");
+			showEmail.value = email;
+			showPassword.value = pass;
 		}
 	},
-	
-	validateUserData: function () {
-		this.validator.isValid();
+
+	returnBack: function () {
+		about.classList.add('hide');
+		formBlock.classList.remove('hide');
 	},
 
-	showGallery: function () {
-		this.gallery.init();
-	}
+	showPasswordString: function () {
+		showPassword.type = showPassword.type === 'password' ? 'text' : 'password';
+		showString.innerHTML = showPassword.type === 'password' ? 'Показать пароль' : 'Скрыть пароль';
+	},
+
+
+	setLocalStorageDafaultData: function ({ inputEmail, password }) {
+		localStorage.setItem('inputEmail', inputEmail);
+		localStorage.setItem('password', password);
+	},
+
+	initComponent: function () {
+		submit.addEventListener("click", this.checkData);
+		showString.addEventListener("click", this.showPasswordString);
+		btnBack.addEventListener("click", this.returnBack);
+	},
+
+
+	// initComponent: function () {
+	// 	if (this.getUserAuthorized) {
+	// 		this.showContent();
+	// 	} else {
+	// 		this.hideBlock();
+	// 		this.login();
+	// 	}
+	// },
+	
+	// validateUserData: function () {
+	// 	this.validator.isValid();
+	// },
+
+	// showGallery: function () {
+	// 	this.gallery.init();
+	// }
 }
