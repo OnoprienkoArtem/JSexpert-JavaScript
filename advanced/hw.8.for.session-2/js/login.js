@@ -7,37 +7,32 @@ const loginDafaultData = {
 
 let LoginForm = function (validatorModule, galleryModule) {
 	this.validator = validatorModule;
+
 	this.gallery = galleryModule;
 
-	const inputEmail = document.querySelector('#inputEmail');
-	const inputPassword = document.querySelector('#inputPassword');
-	const errorMessage = document.querySelector('#alert');
-	const formBlock = document.querySelector('#formBlock');
-	const about = document.querySelector('#about');
-	const showPassword = document.querySelector('#showPassword');
-	const showEmail = document.querySelector('#showEmail');
-		const submit = document.querySelector('#submit');
-		const showString = document.querySelector('#showString');
-	const btnBack = document.querySelector('#btnBack');
+	
+	this.errorMessage = document.querySelector('#alert');
+	this.formBlock = document.querySelector('#formBlock');
+	this.about = document.querySelector('#about');
+	this.showPassword = document.querySelector('#showPassword');
+	this.showEmail = document.querySelector('#showEmail');
+		this.submit = document.querySelector('#submit');
+		this.showString = document.querySelector('#showString');
+	this.btnBack = document.querySelector('#btnBack');
+
+
+
 }
 
 LoginForm.prototype = {
 
-	validationForm: function (mail, pass) {
-		if (mail.length === 0 || pass.length === 0) {
-			errorMessage.classList.remove('hide');
-			return false;
-		} else {
-			errorMessage.classList.add('hide');
-			return true;
-		}
-	},
 
 	checkData: function () {
 		const email = inputEmail.value.trim();
 		const pass = inputPassword.value.trim();
+		
 
-		const resultValidation = validationForm(email, pass);
+		const resultValidation = this.validator.isValid(email, pass);
 		const resLocalStorageEmail = localStorage.getItem("inputEmail");
 		const resLocalStoragePass = localStorage.getItem("password");
 

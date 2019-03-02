@@ -1,4 +1,6 @@
 let Validator = function (mail, pass) {
+
+    
     this.mail = mail;
     this.pass = pass;
 }

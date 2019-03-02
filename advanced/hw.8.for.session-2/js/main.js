@@ -1,10 +1,13 @@
 /* 
 *  Схема инициализации приложения
 */
+const inputEmail = document.querySelector('#inputEmail').value;
+const inputPassword = document.querySelector('#inputPassword').value;
 
 
+let validatorModule = new Validator(inputEmail, inputPassword);
 
-let validatorModule = new Validator();
+console.log(validatorModule);
 
 let galleryModule = new BaseGallery();
 //let galleryModule = new ExtendedGallery();
