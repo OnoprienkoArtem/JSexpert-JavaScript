@@ -5,15 +5,17 @@ const loginDafaultData = {
 
 
 
-let LoginForm = function (validatorModule, loginDafaultData, galleryModule) {
-	this.loginDafaultData = loginDafaultData;
+let LoginForm = function (validatorModule, galleryModule) {
+
 	this.validator = validatorModule;
 
-	// this.gallery = galleryModule;
-	
+	this.galleryModule = galleryModule;
+
+	this.gallery = document.querySelector('#gallery');
+
 	this.errorMessage = document.querySelector('#alert');
 	this.formBlock = document.querySelector('#formBlock');
-	this.about = document.querySelector('#about');	
+	this.about = document.querySelector('#about');
 	this.showPassword = document.querySelector('#showPassword');
 	this.showEmail = document.querySelector('#showEmail');
 	this.btnBack = document.querySelector('#btnBack');
@@ -26,28 +28,34 @@ let LoginForm = function (validatorModule, loginDafaultData, galleryModule) {
 
 LoginForm.prototype = {
 
+	validateData: function (email, pass) {
 
-	checkData: function () {
-		const email = this.inputEmail.value.trim();
-		const pass = this.inputPassword.value.trim();		
+		const resultValidation = this.validator.isValid(email, pass);
 
-		const resultValidation = this.validator.isValid(email, pass, this.errorMessage);		
-
-		if (resultValidation) {			
-			this.setLocalStorageDafaultData(email, pass);
+		if (!resultValidation.status) {
+			showError(resultValidation.msg);
+			return false;
 		}
-
-		const resLocalStorageEmail = localStorage.getItem("inputEmail");
-		const resLocalStoragePass = localStorage.getItem("password");
-
-		if (resultValidation && resLocalStorageEmail === email && resLocalStoragePass === pass) {
-			formBlock.classList.add("hide");
-			about.classList.remove("hide");
-			showEmail.value = email;
-			showPassword.value = pass;
-		}
+		return true;
 	},
 
+	logIn: function (email, pass) {
+		const resLocalStorageEmail = localStorage.getItem("inputEmail");
+		const resLocalStoragePass = localStorage.getItem("password");
+		if (resLocalStorageEmail === email && resLocalStoragePass === pass) {
+			return true;
+		}
+		showError('login fail');
+		return false;
+	},
+
+	showError: function (msg) {
+		this.errorMessage.classList.remove('hide');
+		this.errorMessage.innerText = resultValidation.msg;
+		setTimeout(() => {
+			this.errorMessage.classList.add('hide');
+		}, 2000)
+	},
 
 	returnBack: function () {
 		about.classList.add('hide');
@@ -60,18 +68,45 @@ LoginForm.prototype = {
 	},
 
 
-	setLocalStorageDafaultData: function (inputEmail, password) {
+	setLocalStorageDafaultData: function ({
+		inputEmail,
+		password
+	}) {
 		localStorage.setItem('inputEmail', inputEmail);
 		localStorage.setItem('password', password);
 	},
 
 	initComponent: function () {
-		submit.addEventListener("click", () => {
-			this.checkData();
-		});
+		this.setLocalStorageDafaultData(loginDafaultData);
+		submit.addEventListener("click", logInHandler);
 		showString.addEventListener("click", this.showPasswordString);
 		btnBack.addEventListener("click", this.returnBack);
 	},
+
+	logInHandler: () => {
+		const email = this.inputEmail.value.trim();
+		const pass = this.inputPassword.value.trim();
+		const validateStatus = this.validateData(email, pass);
+		let loginStatus;
+		if (validateStatus) {
+			loginStatus = this.logIn(email, pass);
+		}
+		if (loginStatus) {
+			this.galleryModule.init();
+			renderGalleryPage();
+			// this.navMenu();
+			// renderNavMenu();
+		}
+	},
+
+	renderGalleryPage: function () {
+		this.formBlock.classList.add('hide');
+		this.gallery.classList.remove('hide');
+	},
+
+	
+
+
 
 
 	// initComponent: function () {
@@ -82,7 +117,7 @@ LoginForm.prototype = {
 	// 		this.login();
 	// 	}
 	// },
-	
+
 	// validateUserData: function () {
 	// 	this.validator.isValid();
 	// },
