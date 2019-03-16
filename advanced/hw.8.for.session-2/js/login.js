@@ -78,7 +78,7 @@ LoginForm.prototype = {
 
 	initComponent: function () {
 		this.setLocalStorageDafaultData(loginDafaultData);
-		submit.addEventListener("click", logInHandler);
+		submit.addEventListener("click", this.logInHandler);
 		showString.addEventListener("click", this.showPasswordString);
 		btnBack.addEventListener("click", this.returnBack);
 	},
