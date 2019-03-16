@@ -22,10 +22,12 @@
       <a class="btn btn-outline-primary" href="#">Выход</a>
     </div>
 
-    <main class="text-center" role="main">
-        <div class="alert alert-danger" role="alert">
+    <main class="text-center" role="main" id="formBlock">
+        <div class="alert alert-danger" role="alert" id="alert">
             This is a danger alert—check it out!
         </div>
+
+
         <form class="form-signin">
 
             <h1 class="h3 mb-3 font-weight-normal">Пожалуйста войдите</h1>
@@ -37,7 +39,10 @@
             <div class="mb-3"></div>
             <button class="btn btn-lg btn-primary btn-block" type="button" id="submit">Войти</button>
             <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+
         </form>
+
+        
     </main>
 
     <section class="container hide m-auto" id="about">
@@ -59,7 +64,7 @@
 		</section>
 
 
-    <main role="main">
+    <main role="main" class="hide" id="gallery">
       <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">Автомобильная галлерея</h1>
@@ -179,14 +184,15 @@
         </div>
       </div>
     </main>
+    
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> -->
     <!-- <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script> -->
     <!-- <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script> -->
-    <script src=js/gallery.js></script>
     <script src=js/validator.js></script>
     <script src=js/login.js></script>
+    <script src=js/gallery.js></script>
     <script src=js/main.js></script>
   </body>
 </html>

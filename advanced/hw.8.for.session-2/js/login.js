@@ -5,22 +5,22 @@ const loginDafaultData = {
 
 
 
-let LoginForm = function (validatorModule, galleryModule) {
+let LoginForm = function (validatorModule, loginDafaultData, galleryModule) {
+	this.loginDafaultData = loginDafaultData;
 	this.validator = validatorModule;
 
-	this.gallery = galleryModule;
-
+	// this.gallery = galleryModule;
 	
 	this.errorMessage = document.querySelector('#alert');
 	this.formBlock = document.querySelector('#formBlock');
-	this.about = document.querySelector('#about');
+	this.about = document.querySelector('#about');	
 	this.showPassword = document.querySelector('#showPassword');
 	this.showEmail = document.querySelector('#showEmail');
-		this.submit = document.querySelector('#submit');
-		this.showString = document.querySelector('#showString');
 	this.btnBack = document.querySelector('#btnBack');
-
-
+	this.showString = document.querySelector('#showString');
+	this.submit = document.querySelector('#submit');
+	this.inputEmail = document.querySelector('#inputEmail');
+	this.inputPassword = document.querySelector('#inputPassword');
 
 }
 
@@ -28,11 +28,15 @@ LoginForm.prototype = {
 
 
 	checkData: function () {
-		const email = inputEmail.value.trim();
-		const pass = inputPassword.value.trim();
-		
+		const email = this.inputEmail.value.trim();
+		const pass = this.inputPassword.value.trim();		
 
-		const resultValidation = this.validator.isValid(email, pass);
+		const resultValidation = this.validator.isValid(email, pass, this.errorMessage);		
+
+		if (resultValidation) {			
+			this.setLocalStorageDafaultData(email, pass);
+		}
+
 		const resLocalStorageEmail = localStorage.getItem("inputEmail");
 		const resLocalStoragePass = localStorage.getItem("password");
 
@@ -43,6 +47,7 @@ LoginForm.prototype = {
 			showPassword.value = pass;
 		}
 	},
+
 
 	returnBack: function () {
 		about.classList.add('hide');
@@ -55,13 +60,15 @@ LoginForm.prototype = {
 	},
 
 
-	setLocalStorageDafaultData: function ({ inputEmail, password }) {
+	setLocalStorageDafaultData: function (inputEmail, password) {
 		localStorage.setItem('inputEmail', inputEmail);
 		localStorage.setItem('password', password);
 	},
 
 	initComponent: function () {
-		submit.addEventListener("click", this.checkData);
+		submit.addEventListener("click", () => {
+			this.checkData();
+		});
 		showString.addEventListener("click", this.showPasswordString);
 		btnBack.addEventListener("click", this.returnBack);
 	},

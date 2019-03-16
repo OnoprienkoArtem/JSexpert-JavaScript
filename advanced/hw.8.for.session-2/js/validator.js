@@ -1,12 +1,9 @@
-let Validator = function (mail, pass) {
-
-    
-    this.mail = mail;
-    this.pass = pass;
+let Validator = function () {    
+  
 }
 
 Validator.prototype = {
-    isValid: function (mail, pass) {
+    isValid: function (mail, pass, errorMessage) {         
         if (mail.length === 0 || pass.length === 0) {
             errorMessage.classList.remove('hide');
             return false;
