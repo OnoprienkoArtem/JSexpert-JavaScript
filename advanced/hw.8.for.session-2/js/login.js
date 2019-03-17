@@ -76,13 +76,6 @@ LoginForm.prototype = {
 		localStorage.setItem('password', password);
 	},
 
-	initComponent: function () {
-		this.setLocalStorageDafaultData(loginDafaultData);
-		submit.addEventListener("click", this.logInHandler);
-		showString.addEventListener("click", this.showPasswordString);
-		btnBack.addEventListener("click", this.returnBack);
-	},
-
 	logInHandler: () => {
 		const email = this.inputEmail.value.trim();
 		const pass = this.inputPassword.value.trim();
@@ -98,6 +91,15 @@ LoginForm.prototype = {
 			// renderNavMenu();
 		}
 	},
+
+	initComponent: function () {
+		this.setLocalStorageDafaultData(loginDafaultData);
+		submit.addEventListener("click", logInHandler);
+		showString.addEventListener("click", this.showPasswordString);
+		btnBack.addEventListener("click", this.returnBack);
+	},
+
+
 
 	renderGalleryPage: function () {
 		this.formBlock.classList.add('hide');
