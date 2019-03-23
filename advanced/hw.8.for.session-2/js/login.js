@@ -79,7 +79,9 @@ LoginForm.prototype = {
 	logInHandler: () => {
 		const email = this.inputEmail.value.trim();
 		const pass = this.inputPassword.value.trim();
+		
 		const validateStatus = this.validateData(email, pass);
+		
 		let loginStatus;
 		if (validateStatus) {
 			loginStatus = this.logIn(email, pass);
@@ -94,7 +96,7 @@ LoginForm.prototype = {
 
 	initComponent: function () {
 		this.setLocalStorageDafaultData(loginDafaultData);
-		submit.addEventListener("click", logInHandler);
+		submit.addEventListener("click", this.logInHandler);
 		showString.addEventListener("click", this.showPasswordString);
 		btnBack.addEventListener("click", this.returnBack);
 	},

@@ -31,7 +31,6 @@ ExtendedGallery.prototype = {
 
 
 
-
 function Services(parent, child) {
 	this.parent = parent;
 	this.child = child;
